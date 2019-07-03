@@ -32,12 +32,18 @@ beautiful.init(theme_dir .. "custom/theme.lua")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local revelation=require("revelation")
+
+revelation.init()
+
+revelation.tag_name = 'Task View'
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
 -- mykeys
 --local mykeys = require("keys")
+--local keys = require("keys")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -341,7 +347,6 @@ awful.screen.connect_for_each_screen(function(s)
     }
 end)
 -- }}}
-
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -352,6 +357,15 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+
+    awful.key({ modkey,           }, "e",      revelation),
+    awful.key({ modkey,           }, "j",
+    function ()
+      awful.client.focus.byidx( 1)
+      if client.focus then client.focus:raise() end
+    end),
+
+
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -604,7 +618,6 @@ clientbuttons = gears.table.join(
 -- Set keys
 root.keys(globalkeys)
 -- }}}
-
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
@@ -615,7 +628,9 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
+                     --keys = keys.clientkeys,
                      buttons = clientbuttons,
+                     --buttons = keys.clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
      }

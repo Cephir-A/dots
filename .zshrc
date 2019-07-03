@@ -106,6 +106,8 @@ export INSTALL4J_JAVA_HOME=$JAVA_HOME;
 export GOPATH=$HOME/Documents/Git/Personal/go
 export TERM="xterm-256color"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias get_deps='source $HOME/.config/awesome/get_deps.sh'
+
 
 source $HOME/.ssh/identities
 source $HOME/.scripts/work

@@ -170,8 +170,9 @@ theme.layout_cornerse = layout_icon_path .. "cornerse.png"
 theme.down_arrow = icon_path .. "down_arrow.png"
 
 -- Gaps
-theme.useless_gap   = dpi(6)
+theme.useless_gap   = dpi(8)
 theme.screen_margin = dpi(3)
+theme.gap_single_client  = false
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
