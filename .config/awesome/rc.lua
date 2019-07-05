@@ -118,8 +118,8 @@ myawesomemenu = {
 
 mydisplaymenu = {
    { "Single Display", function() awful.spawn.with_shell("bash ~/.screenlayout/single.sh") end},
-   { "Left - Dual Display", function() awful.spawn.with_shell("bash ~/.screenlayout/leftdouble.sh") end}, 
    { "Right - Dual Display", function() awful.spawn.with_shell("bash ~/.screenlayout/rightdouble.sh") end}, 
+   { "Left - Dual Display", function() awful.spawn.with_shell("bash ~/.screenlayout/leftdouble.sh") end}, 
    { "Triple Display", function() awful.spawn.with_shell("bash ~/.screenlayout/triple.sh") end},
    { "Clone Primary Display", function() awful.spawn.with_shell("bash ~/.screenlayout/cloneonce.sh") end},
 }
@@ -548,7 +548,7 @@ clientkeys = gears.table.join(
         end ,
         {description = "(un)maximize horizontally", group = "client"}),
 
-    awful.key({ modkey }, "x" , function() awful.spawn.with_shell("bash betterlockscreen -l dimblur") end )
+    awful.key({ modkey }, "x" , function() awful.spawn.with_shell("gdmflexiserver -l") end )
 )
 
 -- Bind all key numbers to tags.

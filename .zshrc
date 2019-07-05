@@ -113,3 +113,7 @@ source $HOME/.ssh/identities
 source $HOME/.scripts/work
 
 clear
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/joseph/.sdkman"
+[[ -s "/home/joseph/.sdkman/bin/sdkman-init.sh" ]] && source "/home/joseph/.sdkman/bin/sdkman-init.sh"

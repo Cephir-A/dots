@@ -24,7 +24,7 @@ local theme = {}
 -- Systray settings
 --theme.systray_icon_spacing = 5
 
-theme.font          = "IBM 3270 11"
+theme.font          = "Roboto 11"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
@@ -37,8 +37,6 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = dpi(8)
-theme.border_width  = dpi(2)
 theme.border_normal = "#000000"
 theme.border_focus  = "#2d2d2d"
 theme.border_marked = "#222222"
@@ -170,8 +168,8 @@ theme.layout_cornerse = layout_icon_path .. "cornerse.png"
 theme.down_arrow = icon_path .. "down_arrow.png"
 
 -- Gaps
-theme.useless_gap   = dpi(8)
-theme.screen_margin = dpi(3)
+theme.useless_gap   = dpi(0)
+theme.screen_margin = dpi(0)
 theme.gap_single_client  = false
 
 -- Generate Awesome icon:
