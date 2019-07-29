@@ -22,9 +22,9 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 -- Systray settings
---theme.systray_icon_spacing = 5
+theme.systray_icon_spacing = 5
 
-theme.font          = "Roboto 11"
+theme.font          = "IBM 3270 11"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
@@ -37,6 +37,7 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
+theme.border_width  = dpi(0)
 theme.border_normal = "#000000"
 theme.border_focus  = "#2d2d2d"
 theme.border_marked = "#222222"
@@ -91,7 +92,7 @@ theme.notification_font = theme.font
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = themes_path.."custom/submenu.png"
 theme.menu_height = dpi(20)
-theme.menu_width  = dpi(200)
+theme.menu_width  = dpi(250)
 
 
 -- You can add as many variables as

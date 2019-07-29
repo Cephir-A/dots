@@ -15,6 +15,8 @@ require("volume")
 -- awesome-wm-widgets widgets.
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local volumebar_widget = require("awesome-wm-widgets.volumebar-widget.volumebar")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 local playerctl_widget = require("awesome-wm-widgets.playerctl-widget.playerctl")
@@ -153,50 +155,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
-
-mytaskpopup = awful.popup {
-    widget = awful.widget.tasklist {
-        screen   = screen[1],
-        filter   = awful.widget.tasklist.filter.allscreen,
-        buttons  = tasklist_buttons,
-        style    = {
-            shape = gears.shape.rounded_rect,
-        },
-        layout   = {
-            spacing = 5,
-            forced_num_rows = 2,
-            layout = wibox.layout.grid.horizontal
-        },
-        widget_template = {
-            {
-                {
-                    id     = 'clienticon',
-                    widget = awful.widget.clienticon,
-                },
-                margins = 4,
-                widget  = wibox.container.margin,
-            },
-            id              = 'background_role',
-            forced_width    = 48,
-            forced_height   = 48,
-            widget          = wibox.container.background,
-            create_callback = function(self, c, index, objects) --luacheck: no unused
-                self:get_children_by_id('clienticon')[1].client = c
-            end,
-        },
-    },
-    border_color = '#777777',
-    border_width = 1,
-    ontop        = true,
-    placement    = awful.placement.centered,
-    shape        = gears.shape.rounded_rect,
-    visible = false
-}
-
-
-
-
-
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -255,6 +213,8 @@ end
 
 sprtr = wibox.widget.textbox()
 sprtr:set_text(" | ")
+spacer = wibox.widget.textbox()
+spacer:set_text(" ")
 spotr = wibox.widget.textbox()
 spotr:set_text("Mus: ")
 volr = wibox.widget.textbox()
@@ -297,7 +257,46 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = tasklist_buttons,
         style = {
           shape_border_width = 1,
-        }
+          --shape  = gears.shape.rounded_bar,
+        },
+        layout   = {
+          spacing = 10,
+          spacing_widget = {
+            {
+                forced_width = 5,
+                shape        = gears.shape.circle,
+                widget       = wibox.widget.separator
+            },
+            valign = 'center',
+            halign = 'center',
+            widget = wibox.container.place,
+          },
+          layout  = wibox.layout.flex.horizontal
+        },
+        widget_template = {
+          {
+              {
+                  {
+                      {
+                        id     = 'icon_role',
+                        widget = wibox.widget.imagebox,
+                      },
+                      margins = 2,
+                      widget  = wibox.container.margin,
+                  },
+                  {
+                    id     = 'text_role',
+                    widget = wibox.widget.textbox,
+                  },
+                layout = wibox.layout.fixed.horizontal,
+            },
+            left  = 10,
+            right = 10,
+            widget = wibox.container.margin
+        },
+        id     = 'background_role',
+        widget = wibox.container.background,
+      },
     }
 
     -- Create a systray widget
@@ -306,7 +305,7 @@ awful.screen.connect_for_each_screen(function(s)
     
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", height = 30, screen = s})
+    s.mywibox = awful.wibar({ position = "top", height = 22, screen = s})
     s.mywibox.opacity = 1
     
     
@@ -323,25 +322,29 @@ awful.screen.connect_for_each_screen(function(s)
             --s.mypromptbox,
         },
         
-          s.mypromptbox,
-          --s.mytasklist, -- Middle widget
+          --s.mypromptbox,
+          s.mytasklist, -- Middle widget
         
         { -- Right widgets
             --s.mytasklist,
             sprtr,
             layout = wibox.layout.fixed.horizontal, 
 						mykeyboardlayout,
-            sprtr,
-            volr,
-            volumebar_widget,
-            sprtr,
-            brightr,
-						brightness_widget,
-						sprtr,
+ 						sprtr,
             mytextclock,
-            battery_widget,
 						sprtr,
+            ram_widget,
+            spacer,
+            volume_widget,
+            spacer,
+            volumebar_widget,
+            spacer,
+						brightness_widget,
+            spacer,
+            battery_widget,
+            spacer,
 						wibox.widget.systray(), 
+            sprtr,
             s.mylayoutbox,
         },
     }
@@ -381,7 +384,7 @@ globalkeys = gears.table.join(
         end,
         {description = "focus next by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "k",
+    awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.byidx(-1)
         end,
@@ -408,7 +411,13 @@ globalkeys = gears.table.join(
 
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle") end),
 
-    awful.key({}, "XF86AudioPause", function () awful.util.spawn("playerctl pause") end,
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("playerctl next") end),
+
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("playerctl previous") end),
+
+    awful.key({}, "XF86AudioPlay", function () 
+        awful.spawn.with_shell("source $HOME/.scripts/togglePause.sh") 
+     end,
               {description = "Pause/Play Media", group = "awesome"}),
 
     awful.key({modkey,            }, "/", function () awful.spawn.with_shell("bash $HOME/bin/scripts/toggle_pause.sh") end,
@@ -429,17 +438,8 @@ globalkeys = gears.table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            --awful.client.focus.history.previous()
-            --if client.focus then
-            --client.focus:raise()
-            mytaskpopup.visible = not mytaskpopup.visible
-            
-        end,
-        {description = "go back", group = "client"}),
 
-    -- Screenshot to Clipboard
+              -- Screenshot to Clipboard
     awful.key({}, "Print", function () awful.spawn.with_shell("maim -s | xclip -selection clipboard -t image/png") end,
               {description = "Screenshot selected window/area", group = "launcher"}),
     
@@ -713,7 +713,10 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+
+    awful.titlebar(c, {
+      height = 20
+    }) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,

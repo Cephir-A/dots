@@ -4,6 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/joseph/.oh-my-zsh"
 
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -69,6 +70,7 @@ ZSH_THEME="kayid"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
+plugins=(zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,7 +102,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias vim="nvim"
 
-export PATH="$PATH:$HOME/.local/bin/:$HOME/bin/scripts":$HOME/.cargo/bin:$HOME/Documents/Git/Personal/go/bin/;
+export PATH="$PATH:$HOME/.local/bin/:$HOME/bin/scripts":$HOME/.cargo/bin:$HOME/Documents/Git/Personal/go/bin/:$HOME/.local/share/activemq-5.16.0/bin/linux-x86_64;
 export _JAVA_AWT_WM_NONREPARENTING=1;
 export INSTALL4J_JAVA_HOME=$JAVA_HOME;
 export GOPATH=$HOME/Documents/Git/Personal/go
