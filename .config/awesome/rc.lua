@@ -26,7 +26,9 @@ local playerctl_widget = require("awesome-wm-widgets.playerctl-widget.playerctl"
 -- awful.spawn.with_shell("bash ~/.screenlayout/single.sh")
 -- awful.spawn.with_shell("compton &")
 awful.spawn.with_shell("nm-applet &")
-awful.spawn.with_shell("conky -c $HOME/.config/conky.conf")
+awful.spawn.with_shell("ulauncher --hide-window &")
+awful.spawn.with_shell("source ~/.scripts/conkyinit.sh")
+awful.spawn.with_shell("compton &")
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(theme_dir .. "custom/theme.lua")
 
@@ -91,20 +93,8 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.fair,
     awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.magnifier,
-    -- awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -150,7 +140,6 @@ mylauncher = awful.widget.launcher({ image = beautiful.down_arrow,
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
-
 -- }}}
 
 -- Keyboard map indicator and switcher
@@ -211,6 +200,10 @@ local function set_wallpaper(s)
     end
 end
 
+keybrd = wibox.widget.textbox()
+keybrd:set_text(" ")
+time = wibox.widget.textbox()
+time:set_text(" ")
 sprtr = wibox.widget.textbox()
 sprtr:set_text(" | ")
 spacer = wibox.widget.textbox()
@@ -329,8 +322,10 @@ awful.screen.connect_for_each_screen(function(s)
             --s.mytasklist,
             sprtr,
             layout = wibox.layout.fixed.horizontal, 
-						mykeyboardlayout,
+						keybrd,
+            mykeyboardlayout,
  						sprtr,
+            time,
             mytextclock,
 						sprtr,
             ram_widget,
@@ -362,7 +357,7 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
 
     awful.key({ modkey,           }, "e",      revelation),
-    awful.key({ modkey,           }, "j",
+    awful.key({ modkey, "Shift" }, "Tab",
     function ()
       awful.client.focus.byidx( 1)
       if client.focus then client.focus:raise() end
@@ -434,9 +429,9 @@ globalkeys = gears.table.join(
               {description = "swap with previous client by index", group = "client"}),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+    awful.key({ modkey, "Control" }, "Tab", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
+    awful.key({ modkey, "Shift"   }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
 
               -- Screenshot to Clipboard
@@ -499,10 +494,7 @@ globalkeys = gears.table.join(
                     history_path = awful.util.get_cache_dir() .. "/history_eval"
                   }
               end,
-              {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "d", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "lua execute prompt", group = "awesome"})
 )
 
 clientkeys = gears.table.join(
@@ -644,6 +636,7 @@ awful.rules.rules = {
           "pinentry",
         },
         class = {
+          "Ulauncher",
           "Arandr",
           "Blueman-manager",
           "Gpick",
@@ -669,7 +662,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule = {}, 
-      except_any = { class = {"conky", "Firefox", "Chromium-browser", "Nautilus", "jetbrains-idea", "Toolbox", "Slack"}},
+      except_any = { class = {"conky", "Firefox", "Chromium-browser", "Nautilus", "jetbrains-idea", "Toolbox", "Slack", "Ulauncher"}},
       properties = { titlebars_enabled = true }
     },
 
