@@ -20,14 +20,10 @@ local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local volumebar_widget = require("awesome-wm-widgets.volumebar-widget.volumebar")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 local playerctl_widget = require("awesome-wm-widgets.playerctl-widget.playerctl")
---local sidebar = require("helpers")
---local sidebar = require("sidebar")
+local switcher = require("awesome-switcher")
 -- default xrandr config
--- awful.spawn.with_shell("bash ~/.screenlayout/single.sh")
--- awful.spawn.with_shell("compton &")
 awful.spawn.with_shell("nm-applet &")
-awful.spawn.with_shell("ulauncher --hide-window &")
-awful.spawn.with_shell("source ~/.scripts/conkyinit.sh")
+--awful.spawn.with_shell("ulauncher --hide-window &")
 awful.spawn.with_shell("compton &")
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(theme_dir .. "custom/theme.lua")
@@ -36,11 +32,7 @@ beautiful.init(theme_dir .. "custom/theme.lua")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
-local revelation=require("revelation")
 
-revelation.init()
-
-revelation.tag_name = 'Task View'
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -166,6 +158,8 @@ local taglist_buttons = gears.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
 
+-- Tasklist --
+
 local tasklist_buttons = gears.table.join(
                      awful.button({ }, 1, function (c)
                                               if c == client.focus then
@@ -179,7 +173,7 @@ local tasklist_buttons = gears.table.join(
                                               end
                                           end),
                      awful.button({ }, 3, function()
-                                              awful.menu.client_list({ theme = { width = 250 } })
+                                              awful.menu.client_list({ theme = { width = 350, height = 25} })
                                           end),
                      awful.button({ }, 4, function ()
                                               awful.client.focus.byidx(1)
@@ -187,6 +181,8 @@ local tasklist_buttons = gears.table.join(
                      awful.button({ }, 5, function ()
                                               awful.client.focus.byidx(-1)
                                           end))
+
+-- sets wallpaper --
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -200,20 +196,8 @@ local function set_wallpaper(s)
     end
 end
 
-keybrd = wibox.widget.textbox()
-keybrd:set_text(" ")
-time = wibox.widget.textbox()
-time:set_text(" ")
-sprtr = wibox.widget.textbox()
-sprtr:set_text(" | ")
-spacer = wibox.widget.textbox()
-spacer:set_text(" ")
-spotr = wibox.widget.textbox()
-spotr:set_text("Mus: ")
-volr = wibox.widget.textbox()
-volr:set_text("Vol: ")
-brightr = wibox.widget.textbox()
-brightr:set_text("Brght: ")
+ -- alt tab switcher config --
+-- alt tab switcher config end --
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
@@ -222,8 +206,20 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
+    awful.tag.add("  : Home ", {
+      layout = awful.layout.suit.floating,
+      screen = s,
+    })
+
     -- Each screen has its own tag table.
-    awful.tag({ "  : Term ", "  : w.w.w ", "  : Edit ", "  : Coms ", "  : Media", "  : Apps " }, s, awful.layout.layouts[1])
+    awful.tag({ "  : Term ", "  : w.w.w " }, s, awful.layout.layouts[1])
+
+    awful.tag.add( "  : Edit ", {
+      layout = awful.layout.suit.max,
+      screen = s,
+    })
+
+    awful.tag({ "  : Coms ", "  : Media" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -301,7 +297,21 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ position = "top", height = 22, screen = s})
     s.mywibox.opacity = 1
     
-    
+keybrd = wibox.widget.textbox()
+keybrd:set_text(" ")
+time = wibox.widget.textbox()
+time:set_text(" ")
+sprtr = wibox.widget.textbox()
+sprtr:set_text(" | ")
+spacer = wibox.widget.textbox()
+spacer:set_text(" ")
+spotr = wibox.widget.textbox()
+spotr:set_text("Mus: ")
+volr = wibox.widget.textbox()
+volr:set_text("Vol: ")
+brightr = wibox.widget.textbox()
+brightr:set_text("Brght: ")
+
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
@@ -344,7 +354,7 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 end)
--- }}}
+
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -356,7 +366,6 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 
-    awful.key({ modkey,           }, "e",      revelation),
     awful.key({ modkey, "Shift" }, "Tab",
     function ()
       awful.client.focus.byidx( 1)
@@ -370,6 +379,8 @@ globalkeys = gears.table.join(
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
+    awful.key({ modkey,     }, "Tab",  awful.tag.viewnext,
+              {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
@@ -379,18 +390,27 @@ globalkeys = gears.table.join(
         end,
         {description = "focus next by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.byidx(-1)
-        end,
-        {description = "focus previous by index", group = "client"}
-    ),
+    --awful.key({ "Mod1",           }, "Tab",
+    --    function ()
+    --        awful.client.focus.byidx(-1)
+    --    end,
+    --    {description = "focus previous by index", group = "client"}
+    --),
+    awful.key({ "Mod1",           }, "Tab",
+      function ()
+          switcher.switch( 1, "Mod1", "Alt_L", "Shift", "Tab")
+      end),
+    
+    awful.key({ "Mod1", "Shift"   }, "Tab",
+      function ()
+          switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab")
+      end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
     -- Rofi Launcher
-  --1  awful.key({modkey,            }, "d", function () awful.spawn.with_shell("bash $HOME/bin/rofi-tools/rofi-start") end,
-  --            {description = "Launch Rofi start menu", group = "awesome"}),
+    awful.key({ modkey,           }, "d", function () awful.spawn.with_shell('rofi -show drun -theme /home/joseph/.config/awesome/config/appmenu/drun.rasi') end,
+              {description = "Launch Rofi start menu", group = "awesome"}),
 
     awful.key({modkey,            }, ".", function () awful.spawn.with_shell("bash $HOME/bin/scripts/volume.sh up") end,
               {description = "Volume Up", group = "awesome"}),
@@ -662,18 +682,20 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule = {}, 
-      except_any = { class = {"conky", "Firefox", "Chromium-browser", "Nautilus", "jetbrains-idea", "Toolbox", "Slack", "Ulauncher"}},
+      except_any = { class = {"conky", "Chromium-browser", "Nautilus", "Toolbox" }},
       properties = { titlebars_enabled = true }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
-    --{ rule = { class = "Firefox" },
-    --  properties = { screen = 1, tag = "2" } 
-    --},
-    
-    --{ rule = { class = "Chromium-browser" },
-    --  properties = { screen = 1, tag = "2" } 
-    --},
+    { rule = { class = "kitty" },
+      properties = { tag = awful.screen.focused().tags[2] } 
+    },
+    { rule = { class = "jetbrains-idea" },
+      properties = { tag = awful.screen.focused().tags[4] } 
+    },   
+    { rule = { class = "chromium-browser" },
+      properties = { tag = awful.screen.focused().tags[3] } 
+    },
 }
 -- }}}
 

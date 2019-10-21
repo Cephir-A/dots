@@ -62,7 +62,7 @@ theme.titlebar_bg       = "#222222"
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
+local taglist_square_size = dpi(6)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
 )
@@ -147,7 +147,7 @@ theme.titlebar_maximized_button_focus_active_hover  = tip .. "maximized_focus_ac
 
 theme.titlebars_imitate_borders = false
 
-theme.wallpaper = os.getenv("HOME") .. "/Pictures/wallpaper.jpg"
+theme.wallpaper = os.getenv("HOME") .. "/Pictures/wallpaper.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = layout_icon_path .. "fairh.png"
