@@ -147,7 +147,7 @@ theme.titlebar_maximized_button_focus_active_hover  = tip .. "maximized_focus_ac
 
 theme.titlebars_imitate_borders = false
 
-theme.wallpaper = os.getenv("HOME") .. "/Pictures/wallpaper.png"
+theme.wallpaper = os.getenv("HOME") .. "/Pictures/wallpaper.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = layout_icon_path .. "fairh.png"
@@ -166,7 +166,7 @@ theme.layout_cornernw = layout_icon_path .. "cornernw.png"
 theme.layout_cornerne = layout_icon_path .. "cornerne.png"
 theme.layout_cornersw = layout_icon_path .. "cornersw.png"
 theme.layout_cornerse = layout_icon_path .. "cornerse.png"
-theme.down_arrow = icon_path .. "down_arrow.png"
+theme.down_arrow = icon_path .. "apps.png"
 
 -- Gaps
 theme.useless_gap   = dpi(0)

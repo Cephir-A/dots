@@ -173,7 +173,7 @@ local tasklist_buttons = gears.table.join(
                                               end
                                           end),
                      awful.button({ }, 3, function()
-                                              awful.menu.client_list({ theme = { width = 350, height = 25} })
+                                              awful.menu.client_list({ theme = { width = 350, height = 0} })
                                           end),
                      awful.button({ }, 4, function ()
                                               awful.client.focus.byidx(1)
@@ -206,24 +206,38 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
-    awful.tag.add("  : Home ", {
-      layout = awful.layout.suit.floating,
+-- Taglist management --    
+    -- Each screen has its own tag table.
+    awful.tag({ "  : Home " }, s, awful.layout.layouts[1])
+
+    awful.tag.add( "  : Term ", {
+      layout = awful.layout.layouts[1],
       screen = s,
     })
 
-    -- Each screen has its own tag table.
-    awful.tag({ "  : Term ", "  : w.w.w " }, s, awful.layout.layouts[1])
+    awful.tag.add( "  : w.w.w ", {
+      layout = awful.layout.layouts[1],
+      screen = s,
+    })
 
     awful.tag.add( "  : Edit ", {
       layout = awful.layout.suit.max,
       screen = s,
     })
 
-    awful.tag({ "  : Coms ", "  : Media" }, s, awful.layout.layouts[1])
+    awful.tag.add( "  : Coms ", {
+      layout = awful.layout.layouts[1],
+      screen = s,
+    })
+    
+    awful.tag.add( "  : Media", {
+      layout = awful.layout.layouts[1],
+      screen = s,
+    })
+
+-- Taglist management over --
 
     -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
-    s.mypromptbox.prompt = "zsh $ "
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -232,10 +246,11 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
-        filter  = awful.widget.taglist.filter.all,
+        filter  = awful.widget.taglist.filter.noempty,
         buttons = taglist_buttons
     }
 
@@ -252,8 +267,8 @@ awful.screen.connect_for_each_screen(function(s)
           spacing = 10,
           spacing_widget = {
             {
-                forced_width = 5,
-                shape        = gears.shape.circle,
+                forced_width = 0,
+                shape        = gears.shape.rectangle,
                 widget       = wibox.widget.separator
             },
             valign = 'center',
@@ -294,23 +309,24 @@ awful.screen.connect_for_each_screen(function(s)
     
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", height = 22, screen = s})
+    s.mywibox = awful.wibar({ position = "top", height = 24, screen = s})
     s.mywibox.opacity = 1
     
 keybrd = wibox.widget.textbox()
 keybrd:set_text(" ")
 time = wibox.widget.textbox()
 time:set_text(" ")
-sprtr = wibox.widget.textbox()
-sprtr:set_text(" | ")
-spacer = wibox.widget.textbox()
-spacer:set_text(" ")
-spotr = wibox.widget.textbox()
-spotr:set_text("Mus: ")
-volr = wibox.widget.textbox()
-volr:set_text("Vol: ")
-brightr = wibox.widget.textbox()
-brightr:set_text("Brght: ")
+sprtr = wibox.widget{
+  widget = wibox.widget.separator,
+  forced_width = 10,
+}
+spacer = wibox.widget {
+    widget       = wibox.widget.separator,
+    shape = gears.shape.rectangle,
+    color = beautiful.bg_normal,
+    forced_width = 5,
+}
+--spacer:set_text(" ")
 
     -- Add widgets to the wibox
     s.mywibox:setup {
