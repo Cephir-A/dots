@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/joseph/.oh-my-zsh"
+export ZSH=$HOME"/.oh-my-zsh"
 
 
 # Set name of the theme to load --- if set to "random", it will
@@ -114,8 +114,6 @@ source $HOME/.ssh/identities
 source $HOME/.scripts/work
 
 clear
-
-eval $(thefuck --alias)
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/joseph/.sdkman"
