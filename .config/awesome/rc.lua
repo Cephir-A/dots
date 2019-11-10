@@ -9,6 +9,7 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+local home_dir = os.getenv("HOME") 
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 local freedesktop = require("freedesktop")
 -- awesome-wm-widgets widgets.
@@ -417,7 +418,7 @@ globalkeys = gears.table.join(
               {description = "show main menu", group = "awesome"}),
 
     -- Rofi Launcher
-    awful.key({ modkey,           }, "d", function () awful.spawn.with_shell('rofi -show drun -theme /home/joseph/.config/awesome/config/appmenu/drun.rasi') end,
+    awful.key({ modkey,           }, "d", function () awful.spawn.with_shell('rofi -show drun -theme ' .. home_dir .. '/.config/awesome/config/appmenu/drun.rasi') end,
               {description = "Launch Rofi start menu", group = "awesome"}),
 
     awful.key({modkey,            }, ".", function () awful.spawn.with_shell("bash $HOME/bin/scripts/volume.sh up") end,
@@ -510,8 +511,6 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "y",
               function ()
