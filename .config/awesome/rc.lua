@@ -13,11 +13,9 @@ local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 local freedesktop = require("freedesktop")
 -- awesome-wm-widgets widgets.
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-local playerctl_widget = require("awesome-wm-widgets.playerctl-widget.playerctl")
 local switcher = require("awesome-switcher")
 -- default xrandr config
 awful.spawn.with_shell("nm-applet &")
