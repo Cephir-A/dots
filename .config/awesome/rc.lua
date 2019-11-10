@@ -11,13 +11,11 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 local freedesktop = require("freedesktop")
-require("volume")
 -- awesome-wm-widgets widgets.
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
-local volumebar_widget = require("awesome-wm-widgets.volumebar-widget.volumebar")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 local playerctl_widget = require("awesome-wm-widgets.playerctl-widget.playerctl")
 local switcher = require("awesome-switcher")
@@ -136,6 +134,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
+
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -208,7 +207,7 @@ awful.screen.connect_for_each_screen(function(s)
 
 -- Taglist management --    
     -- Each screen has its own tag table.
-    awful.tag({ "  : Home " }, s, awful.layout.layouts[1])
+    awful.tag({ "  : Home " }, s, awful.layout.layouts[2])
 
     awful.tag.add( "  : Term ", {
       layout = awful.layout.layouts[1],
@@ -221,7 +220,7 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     awful.tag.add( "  : Edit ", {
-      layout = awful.layout.suit.max,
+      layout = awful.layout.layouts[4],
       screen = s,
     })
 
@@ -312,21 +311,20 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ position = "top", height = 24, screen = s})
     s.mywibox.opacity = 1
     
-keybrd = wibox.widget.textbox()
-keybrd:set_text(" ")
-time = wibox.widget.textbox()
-time:set_text(" ")
-sprtr = wibox.widget{
-  widget = wibox.widget.separator,
-  forced_width = 10,
-}
-spacer = wibox.widget {
-    widget       = wibox.widget.separator,
-    shape = gears.shape.rectangle,
-    color = beautiful.bg_normal,
-    forced_width = 5,
-}
---spacer:set_text(" ")
+    keybrd = wibox.widget.textbox()
+    keybrd:set_text(" ")
+    time = wibox.widget.textbox()
+    time:set_text(" ")
+    sprtr = wibox.widget{
+      widget          = wibox.widget.separator,
+      forced_width    = 10,
+    }
+    spacer = wibox.widget {
+        widget        = wibox.widget.separator,
+        shape         = gears.shape.rectangle,
+        color         = beautiful.bg_normal,
+        forced_width  = 5,
+    }
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -334,7 +332,6 @@ spacer = wibox.widget {
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
-						sprtr,
             s.mytaglist,
 						sprtr,
             playerctl_widget,
@@ -348,24 +345,21 @@ spacer = wibox.widget {
             --s.mytasklist,
             sprtr,
             layout = wibox.layout.fixed.horizontal, 
-						keybrd,
-            mykeyboardlayout,
- 						sprtr,
             time,
             mytextclock,
 						sprtr,
             ram_widget,
-            spacer,
-            volume_widget,
-            spacer,
-            volumebar_widget,
+						keybrd,
+            mykeyboardlayout,
             spacer,
 						brightness_widget,
             spacer,
+            volume_widget,
+            spacer,
             battery_widget,
             spacer,
-						wibox.widget.systray(), 
-            sprtr,
+						wibox.widget.systray(),
+            spacer,
             s.mylayoutbox,
         },
     }

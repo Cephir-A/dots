@@ -1,0 +1,97 @@
+configuration {
+    show-icons:                     true;
+    icon-theme:                     "Paper";
+    font:                           "Roboto 9";
+}
+
+
+* {
+    background-color:               transparent;
+    background:                     #000000CC;
+    background-alt:                 #E5E9F047;
+    text-color:                     #D8DEE9;
+    selected-text-color:            #000000;
+    primary:                        #A3BE8C;
+    urgent:                         #BF616A;
+}
+
+
+window {
+    transparency:                   "real";
+    background-color:               @background;
+    height:                         1080px;
+    width:                          1920px;
+    location:                       northwest;
+    anchor:                         northwest;
+    x-offset:                       00;
+    y-offset:                       00;
+}
+
+prompt {
+    enabled:                        false;
+}
+
+entry  {
+    expand:                         false;
+    width:                          36em;
+    margin:                         150px -600px 20px 660px;
+    border-radius:                  6;
+    padding:                        10px 10px 10px 10px;
+    background-color:               #ffffff20;
+    border:                         0px 0px solid 0px 0px;
+    border-color:                   @text-color;
+    font:                           "Roboto 14";
+}
+
+listview {
+    columns:                        4;
+    margin:                         40px 120px 100px 120px;
+}
+
+element {
+    orientation:                    vertical;
+    padding:                        8px;
+    margin:                         8px;
+}
+
+mainbox {
+    padding:                        10px 40px 10px 40px;
+}
+
+element {
+    padding:                        15px;
+}
+
+element normal.urgent, element alternate.urgent {
+    background-color:               @urgent;
+}
+
+element normal.active, element alternate.active {
+    background-color:               @background-alt;
+    color:                          @selected-text-color;
+}
+
+element selected {
+    background-color:               @background-alt;
+    color:                          @selected-text-color;
+}
+
+element selected.urgent {
+    background-color:               @urgent;
+}
+
+element selected.active {
+    background-color:               @background-alt;
+    color:                          @selected-text-color;
+}
+
+element-icon {
+    size:                           48;
+    border:                         0px;
+}
+
+element-text {
+    expand:                         true;
+    horizontal-align:               0.5;
+}
+
