@@ -82,7 +82,6 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
-    awful.layout.suit.fair,
     awful.layout.suit.max,
 }
 -- }}}
@@ -399,12 +398,7 @@ globalkeys = gears.table.join(
         end,
         {description = "focus next by index", group = "client"}
     ),
-    --awful.key({ "Mod1",           }, "Tab",
-    --    function ()
-    --        awful.client.focus.byidx(-1)
-    --    end,
-    --    {description = "focus previous by index", group = "client"}
-    --),
+
     awful.key({ "Mod1",           }, "Tab",
       function ()
           switcher.switch( 1, "Mod1", "Alt_L", "Shift", "Tab")
@@ -422,22 +416,25 @@ globalkeys = gears.table.join(
               {description = "Launch Rofi start menu", group = "awesome"}),
 
     awful.key({modkey,            }, ".", function () awful.spawn.with_shell("bash $HOME/bin/scripts/volume.sh up") end,
-              {description = "Volume Up", group = "awesome"}),
+              {description = "Volume Up", group = "Audio"}),
 
     awful.key({modkey,            }, ",", function () awful.spawn.with_shell("bash $HOME/bin/scripts/volume.sh down") end,
-              {description = "Volume Down", group = "awesome"}),
+              {description = "Volume Down", group = "Audio"}),
 
     awful.key({}, "XF86AudioRaiseVolume", function () awful.spawn.with_shell("bash $HOME/bin/scripts/volume.sh up") end,
-              {description = "Volume Up", group = "awesome"}),
+              {description = "Volume Up", group = "Audio"}),
 
     awful.key({}, "XF86AudioLowerVolume", function () awful.spawn.with_shell("bash $HOME/bin/scripts/volume.sh down") end,
-              {description = "Volume Down", group = "awesome"}),
+              {description = "Volume Down", group = "Audio"}),
 
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle") end),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle") end,
+              {description = "Mute Audio", group = "Audio"}),
 
-    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("playerctl next") end),
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("playerctl next") end,
+              {description = "Play Next Song", group = "Audio"}),
 
-    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("playerctl previous") end),
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("playerctl previous") end,
+              {description = "Play Previous Song", group = "Audio"}),
 
     awful.key({}, "XF86AudioPlay", function () 
         awful.spawn.with_shell("source $HOME/.scripts/togglePause.sh") 
@@ -508,20 +505,7 @@ globalkeys = gears.table.join(
                     )
                   end
               end,
-              {description = "restore minimized", group = "client"}),
-
-    -- Prompt
-
-    awful.key({ modkey }, "y",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Lua $ ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"})
+              {description = "restore minimized", group = "client"})
 )
 
 clientkeys = gears.table.join(

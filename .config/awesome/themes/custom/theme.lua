@@ -24,7 +24,7 @@ local theme = {}
 -- Systray settings
 theme.systray_icon_spacing = 5
 
-theme.font          = "IBM 3270 11"
+theme.font          = "Roboto 11"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#404047"
