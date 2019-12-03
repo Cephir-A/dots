@@ -34,11 +34,20 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- mykeys
---local mykeys = require("keys")
---local keys = require("keys")
+--------------------Variables--------------------
 
--- {{{ Error handling
+terminal = "kitty"
+browser = "firefox"
+work_browser = "Chromium"
+editor = os.getenv("EDITOR") or "nvim"
+editor_cmd = terminal .. " -e " .. editor
+
+-- Usually, Mod4 is the key with a logo between Control and Alt.
+modkey = "Mod4"
+
+
+--------------------Error Handling--------------------
+
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -61,22 +70,8 @@ do
         in_error = false
     end)
 end
--- }}}
 
-
--- This is used later as the default terminal and editor to run.
-terminal = "kitty"
-browser = "firefox"
-work_browser = "Chromium"
-editor = os.getenv("EDITOR") or "nvim"
-editor_cmd = terminal .. " -e " .. editor
-
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+--------------------Layouts--------------------
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -84,9 +79,9 @@ awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.max,
 }
--- }}}
 
--- {{{ Menu
+--------------------Menu--------------------
+
 -- Create a launcher widget and a main menu
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
@@ -122,6 +117,8 @@ mymainmenu = freedesktop.menu.build({
    }
 })
 
+--------------------Menu--------------------
+
 -- Awesome launcher widget
 mylauncher = awful.widget.launcher({ image = beautiful.down_arrow,
                                      menu = mymainmenu })
@@ -155,7 +152,7 @@ local taglist_buttons = gears.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
 
--- Tasklist --
+--------------------Tasklist--------------------
 
 local tasklist_buttons = gears.table.join(
                      awful.button({ }, 1, function (c)
@@ -179,7 +176,7 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
--- sets wallpaper --
+--------------------Wallpaper Management--------------------
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -193,8 +190,6 @@ local function set_wallpaper(s)
     end
 end
 
- -- alt tab switcher config --
--- alt tab switcher config end --
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
@@ -203,9 +198,11 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
--- Taglist management --    
+
+--------------------Taglist Management--------------------
+
     -- Each screen has its own tag table.
-    awful.tag({ "  : Home " }, s, awful.layout.layouts[2])
+    awful.tag({ "  : Home " }, s, awful.layout.layouts[1])
 
     awful.tag.add( "  : Term ", {
       layout = awful.layout.layouts[1],
@@ -218,7 +215,7 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     awful.tag.add( "  : Edit ", {
-      layout = awful.layout.layouts[4],
+      layout = awful.layout.layouts[3],
       screen = s,
     })
 
@@ -252,7 +249,9 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
+    s.mytasklist = {
+        layout = wibox.layout.flex.horizontal,
+        awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
@@ -261,7 +260,7 @@ awful.screen.connect_for_each_screen(function(s)
           --shape  = gears.shape.rounded_bar,
         },
         layout   = {
-          spacing = 10,
+          spacing = 0,
           spacing_widget = {
             {
                 forced_width = 0,
@@ -272,7 +271,7 @@ awful.screen.connect_for_each_screen(function(s)
             halign = 'center',
             widget = wibox.container.place,
           },
-          layout  = wibox.layout.flex.horizontal
+          layout  = wibox.layout.fixed.horizontal
         },
         widget_template = {
           {
@@ -288,6 +287,7 @@ awful.screen.connect_for_each_screen(function(s)
                   {
                     id     = 'text_role',
                     widget = wibox.widget.textbox,
+                    forced_width = 200,
                   },
                 layout = wibox.layout.fixed.horizontal,
             },
@@ -299,6 +299,7 @@ awful.screen.connect_for_each_screen(function(s)
         widget = wibox.container.background,
       },
     }
+  }
 
     -- Create a systray widget
     systray = wibox.widget.systray()
@@ -333,6 +334,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
 						sprtr,
             playerctl_widget,
+            expand = "none",
             --s.mypromptbox,
         },
         
@@ -673,7 +675,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule = {}, 
-      except_any = { class = {"conky", "Chromium-browser", "Nautilus", "Toolbox" }},
+      except_any = { class = {"conky", "Nautilus", "Toolbox" }},
       properties = { titlebars_enabled = true }
     },
 
@@ -721,7 +723,7 @@ client.connect_signal("request::titlebars", function(c)
 
 
     awful.titlebar(c, {
-      height = 20
+      height = 20 
     }) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
@@ -731,16 +733,15 @@ client.connect_signal("request::titlebars", function(c)
         { -- Middle
             { -- Title
                 align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
+                widget = awful.titlebar.widget.titlewidget(c),
             },
             buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
+            awful.titlebar.widget.minimizebutton (c),
+            awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },

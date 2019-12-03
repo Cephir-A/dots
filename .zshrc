@@ -110,6 +110,8 @@ export TERM="xterm-256color"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias get_deps='source $HOME/.config/awesome/get_deps.sh'
 
+eval "$(ssh-agent)"
+
 source $HOME/.ssh/identities
 source $HOME/.scripts/work
 
@@ -118,3 +120,5 @@ clear
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/joseph/.sdkman"
 [[ -s "/home/joseph/.sdkman/bin/sdkman-init.sh" ]] && source "/home/joseph/.sdkman/bin/sdkman-init.sh"
+
+eval $(thefuck --alias)
