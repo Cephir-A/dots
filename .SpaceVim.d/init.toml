@@ -42,6 +42,7 @@ spacevim_autocomplete_method = "deoplete"
   name = "lang#WebAssembly"
   name = "lang#kotlin"
   name = "lang#java"
+  name = "lang#lua"
 
 [[layers]]
   name = "lang#go"

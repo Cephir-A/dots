@@ -26,7 +26,7 @@ theme.systray_icon_spacing = 5
 
 theme.font          = "Roboto 11"
 
-theme.bg_normal     = "#222222"
+theme.bg_normal     = "#2c2c2c"
 theme.bg_focus      = "#404047"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
@@ -45,8 +45,8 @@ theme.border_marked = "#222222"
 -- Rounded corners
 theme.border_radius = dpi(6)
 
-theme.titlebar_bg_focus = "#2d2d2d"
-theme.titlebar_bg       = "#222222"
+theme.titlebar_bg_focus = "#2c2c2c"
+theme.titlebar_bg       = "#2b2b2b"
 
 -- There are other variable sets
 -- overriding the default one when

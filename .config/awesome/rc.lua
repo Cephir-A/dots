@@ -302,28 +302,26 @@ awful.screen.connect_for_each_screen(function(s)
   }
 
     -- Create a systray widget
-    systray = wibox.widget.systray()
+    --systray = wibox.widget.systray()
     --systray:set_base_size(30)
-    
+    s.systray = wibox.widget.systray()
+    s.systray.visible = false
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", height = 24, screen = s})
+    s.mywibox = awful.wibar({ position = "top", height = 28, screen = s})
     s.mywibox.opacity = 1
     
     keybrd = wibox.widget.textbox()
     keybrd:set_text(" ")
     time = wibox.widget.textbox()
     time:set_text(" ")
-    sprtr = wibox.widget{
-      widget          = wibox.widget.separator,
-      forced_width    = 10,
-    }
     spacer = wibox.widget {
         widget        = wibox.widget.separator,
         shape         = gears.shape.rectangle,
         color         = beautiful.bg_normal,
         forced_width  = 5,
     }
+
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -332,7 +330,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
-						sprtr,
+            spacer,
             playerctl_widget,
             expand = "none",
             --s.mypromptbox,
@@ -343,11 +341,9 @@ awful.screen.connect_for_each_screen(function(s)
         
         { -- Right widgets
             --s.mytasklist,
-            sprtr,
             layout = wibox.layout.fixed.horizontal, 
             time,
             mytextclock,
-						sprtr,
             ram_widget,
 						keybrd,
             mykeyboardlayout,
@@ -358,7 +354,7 @@ awful.screen.connect_for_each_screen(function(s)
             spacer,
             battery_widget,
             spacer,
-						wibox.widget.systray(),
+            s.systray, 
             spacer,
             s.mylayoutbox,
         },
@@ -375,12 +371,6 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-
-    awful.key({ modkey, "Shift" }, "Tab",
-    function ()
-      awful.client.focus.byidx( 1)
-      if client.focus then client.focus:raise() end
-    end),
 
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -405,7 +395,14 @@ globalkeys = gears.table.join(
       function ()
           switcher.switch( 1, "Mod1", "Alt_L", "Shift", "Tab")
       end),
-    
+   
+    awful.key({ "Mod1",           }, "s",
+      function ()
+        awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
+      end,
+              {description = "Toggle systray", group = "awesome"}
+      ),
+
     awful.key({ "Mod1", "Shift"   }, "Tab",
       function ()
           switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab")
@@ -723,12 +720,14 @@ client.connect_signal("request::titlebars", function(c)
 
 
     awful.titlebar(c, {
-      height = 20 
+      size = 28,
     }) : setup {
         { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
+            awful.titlebar.widget.closebutton    (c),
+            awful.titlebar.widget.maximizedbutton(c),
+            awful.titlebar.widget.minimizebutton (c),
+            awful.titlebar.widget.stickybutton   (c),
+            layout = wibox.layout.fixed.horizontal()
         },
         { -- Middle
             { -- Title
@@ -739,11 +738,9 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.minimizebutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
+            awful.titlebar.widget.iconwidget(c),
+            buttons = buttons,
+            layout  = wibox.layout.fixed.horizontal,
         },
         layout = wibox.layout.align.horizontal
     }
