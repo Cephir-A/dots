@@ -46,7 +46,7 @@ theme.border_marked = "#222222"
 theme.border_radius = dpi(6)
 
 theme.titlebar_bg_focus = "#2c2c2c"
-theme.titlebar_bg       = "#2b2b2b"
+theme.titlebar_bg       = "#2c2c2c"
 
 -- There are other variable sets
 -- overriding the default one when
