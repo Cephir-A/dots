@@ -720,7 +720,7 @@ client.connect_signal("request::titlebars", function(c)
 
 
     awful.titlebar(c, {
-      size = 28,
+      size = 30,
     }) : setup {
         { -- Left
             awful.titlebar.widget.closebutton    (c),
