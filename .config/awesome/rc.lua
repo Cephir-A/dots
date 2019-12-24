@@ -308,7 +308,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.systray.visible = false
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", height = 28, screen = s})
+    s.mywibox = awful.wibar({ position = "top", height = 24, screen = s})
     s.mywibox.opacity = 1
     
     keybrd = wibox.widget.textbox()
