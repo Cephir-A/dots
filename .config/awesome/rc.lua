@@ -550,7 +550,7 @@ clientkeys = gears.table.join(
         end ,
         {description = "(un)maximize horizontally", group = "client"}),
 
-    awful.key({ modkey }, "x" , function() awful.spawn.with_shell("gdmflexiserver -l") end )
+    awful.key({ modkey }, "x" , function() awful.spawn.with_shell("source $HOME/.scripts/lock.sh") end )
 )
 
 -- Bind all key numbers to tags.
