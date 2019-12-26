@@ -43,6 +43,7 @@ spacevim_autocomplete_method = "deoplete"
   name = "lang#kotlin"
   name = "lang#java"
   name = "lang#lua"
+  name = "denite"
 
 [[layers]]
   name = "lang#go"
@@ -51,3 +52,4 @@ spacevim_autocomplete_method = "deoplete"
 name = 'shell'
 default_position = 'top'
 default_height = 30
+

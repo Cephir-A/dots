@@ -308,7 +308,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.systray.visible = false
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", height = 28, screen = s})
+    s.mywibox = awful.wibar({ position = "top", height = 24, screen = s})
     s.mywibox.opacity = 1
     
     keybrd = wibox.widget.textbox()
@@ -550,7 +550,7 @@ clientkeys = gears.table.join(
         end ,
         {description = "(un)maximize horizontally", group = "client"}),
 
-    awful.key({ modkey }, "x" , function() awful.spawn.with_shell("gdmflexiserver -l") end )
+    awful.key({ modkey }, "x" , function() awful.spawn.with_shell("source $HOME/.scripts/lock.sh") end )
 )
 
 -- Bind all key numbers to tags.
@@ -720,7 +720,7 @@ client.connect_signal("request::titlebars", function(c)
 
 
     awful.titlebar(c, {
-      size = 28,
+      size = 30,
     }) : setup {
         { -- Left
             awful.titlebar.widget.closebutton    (c),

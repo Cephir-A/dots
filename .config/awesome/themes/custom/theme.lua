@@ -166,7 +166,7 @@ theme.layout_cornernw = layout_icon_path .. "cornernw.png"
 theme.layout_cornerne = layout_icon_path .. "cornerne.png"
 theme.layout_cornersw = layout_icon_path .. "cornersw.png"
 theme.layout_cornerse = layout_icon_path .. "cornerse.png"
-theme.down_arrow = icon_path .. "apps.png"
+theme.down_arrow = icon_path .. "start.png"
 
 -- Gaps
 theme.useless_gap   = dpi(0)
