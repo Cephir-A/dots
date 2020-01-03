@@ -329,7 +329,10 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
+            spacer,
             s.mytaglist,
+            spacer,
+            spacer,
             spacer,
             playerctl_widget,
             expand = "none",

@@ -22,7 +22,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 -- Systray settings
-theme.systray_icon_spacing = 5
+theme.systray_icon_spacing = 3
 
 theme.font          = "Roboto 11"
 
@@ -37,10 +37,95 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.border_width  = dpi(0)
-theme.border_normal = "#000000"
+theme.border_width  = dpi(2)
+theme.border_normal = "#2d2d2d"
 theme.border_focus  = "#2d2d2d"
 theme.border_marked = "#222222"
+
+-- wibar\
+-- theme.wibar\_stretch = nil
+theme.wibar_border_width = 4
+theme.wibar_border_color = "#2c2c2c"
+-- theme.wibar\_ontop = nil
+-- theme.wibar\_cursor = nil
+-- theme.wibar\_opacity = nil
+-- theme.wibar\_type = nil
+-- theme.wibar\_width = nil
+-- theme.wibar\_height = nil
+-- theme.wibar\_bg = nil
+-- theme.wibar\_bgimage = nil
+-- theme.wibar\_fg = nil
+-- theme.wibar\_shape = nil
+
+-- tasklist\
+-- theme.tasklist\_fg\_normal = nil
+-- theme.tasklist\_bg\_normal = nil
+-- theme.tasklist\_fg\_focus = nil
+-- theme.tasklist\_bg\_focus = nil
+-- theme.tasklist\_fg\_urgent = nil
+-- theme.tasklist\_bg\_urgent = nil
+-- theme.tasklist\_fg\_minimize = nil
+-- theme.tasklist\_bg\_minimize = nil
+-- theme.tasklist\_bg\_image\_normal = nil
+-- theme.tasklist\_bg\_image\_focus = nil
+-- theme.tasklist\_bg\_image\_urgent = nil
+-- theme.tasklist\_bg\_image\_minimize = nil
+-- theme.tasklist\_disable\_icon = nil
+-- theme.tasklist\_disable\_task\_name = nil
+-- theme.tasklist\_plain\_task\_name = nil
+-- theme.tasklist\_font = nil
+-- theme.tasklist\_align = nil
+-- theme.tasklist\_font\_focus = nil
+-- theme.tasklist\_font\_minimized = nil
+-- theme.tasklist\_font\_urgent = nil
+-- theme.tasklist\_spacing = nil
+-- theme.tasklist\_shape = nil
+-- theme.tasklist\_shape\_border\_width = nil
+-- theme.tasklist\_shape\_border\_color = nil
+-- theme.tasklist\_shape\_focus = nil
+-- theme.tasklist\_shape\_border\_width\_focus = nil
+-- theme.tasklist\_shape\_border\_color\_focus = nil
+-- theme.tasklist\_shape\_minimized = nil
+-- theme.tasklist\_shape\_border\_width\_minimized = nil
+-- theme.tasklist\_shape\_border\_color\_minimized = nil
+-- theme.tasklist\_shape\_urgent = nil
+-- theme.tasklist\_shape\_border\_width\_urgent = nil
+-- theme.tasklist\_shape\_border\_color\_urgent = nil
+
+-- taglist\
+-- theme.taglist\_fg\_focus = nil
+-- theme.taglist\_bg\_focus = nil
+-- theme.taglist\_fg\_urgent = nil
+-- theme.taglist\_bg\_urgent = nil
+-- theme.taglist\_bg\_occupied = nil
+-- theme.taglist\_fg\_occupied = nil
+-- theme.taglist\_bg\_empty = nil
+-- theme.taglist\_fg\_empty = nil
+-- theme.taglist\_bg\_volatile = nil
+-- theme.taglist\_fg\_volatile = nil
+-- theme.taglist\_squares\_sel = nil
+-- theme.taglist\_squares\_unsel = nil
+-- theme.taglist\_squares\_sel\_empty = nil
+-- theme.taglist\_squares\_unsel\_empty = nil
+-- theme.taglist\_squares\_resize = nil
+-- theme.taglist\_disable\_icon = nil
+-- theme.taglist\_font = nil
+-- theme.taglist\_spacing = nil
+-- theme.taglist\_shape = nil
+-- theme.taglist\_shape\_border\_width = nil
+-- theme.taglist\_shape\_border\_color = nil
+-- theme.taglist\_shape\_empty = nil
+-- theme.taglist\_shape\_border\_width\_empty = nil
+-- theme.taglist\_shape\_border\_color\_empty = nil
+-- theme.taglist\_shape\_focus = nil
+-- theme.taglist\_shape\_border\_width\_focus = nil
+-- theme.taglist\_shape\_border\_color\_focus = nil
+-- theme.taglist\_shape\_urgent = nil
+-- theme.taglist\_shape\_border\_width\_urgent = nil
+-- theme.taglist\_shape\_border\_color\_urgent = nil
+-- theme.taglist\_shape\_volatile = nil
+-- theme.taglist\_shape\_border\_width\_volatile = nil
+-- theme.taglist\_shape\_border\_color\_volatile = nil
 
 -- Rounded corners
 theme.border_radius = dpi(6)
