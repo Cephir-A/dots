@@ -11,7 +11,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local home_dir = os.getenv("HOME") 
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
-local freedesktop = require("freedesktop")
 -- awesome-wm-widgets widgets.
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
@@ -84,11 +83,13 @@ awful.layout.layouts = {
 
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
+   { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+   { "Manual", terminal .. " -e man awesome" },
+   { "Edit config", editor_cmd .. " " .. awesome.conffile },
+   { "Reload", awesome.restart },
+   { "Logout", function() awesome.quit() end },
+   { "Shutdown", function() awful.spawn.with_shell("systemctl poweroff") end},
+   { "Lock", function() awful.spawn.with_shell("bash betterlockscreen -l dimblur") end}
 }
 
 mydisplaymenu = {
@@ -99,23 +100,24 @@ mydisplaymenu = {
    { "Clone Primary Display", function() awful.spawn.with_shell("bash ~/.screenlayout/cloneonce.sh") end},
 }
 
-sessionmenu = {
-   { "Shutdown", function() awful.spawn.with_shell("systemctl poweroff") end},
-   { "Logout", function() awesome.quit() end},
-   { "Lock", function() awful.spawn.with_shell("bash betterlockscreen -l dimblur") end},
-   { "Human Mode", function() awful.spawn.with_shell("notify-send \"Sorry, human mode is still in developement.\"") end},
-}
+--tagmenu = awful.menu( { items =
+--   { "Home", function() end},
+--   { "Terminal", function() end},
+--   { "Browser", function() end},
+--   { "Editors", function() end},
+--   { "Messaging", function() end},
+--   { "Media", function() end} 
+-- })
 
-mymainmenu = freedesktop.menu.build({ 
-   before = { 
-     { "Awesome", myawesomemenu, beautiful.awesome_icon }, 
-     { "Displays", mydisplaymenu}
-     },
-   after = {
-     { "Terminal", terminal },
-     { "Session", sessionmenu}
-   }
+mymainmenu = awful.menu(
+{ items = 
+  { 
+    { "Session", myawesomemenu, beautiful.awesome_icon },
+    { "Display Profiles", mydisplaymenu },
+    { "Open Terminal", terminal }
+  }
 })
+
 
 --------------------Menu--------------------
 
@@ -416,6 +418,9 @@ globalkeys = gears.table.join(
     -- Rofi Launcher
     awful.key({ modkey,           }, "d", function () awful.spawn.with_shell('rofi -show drun -theme ' .. home_dir .. '/.config/awesome/config/appmenu/drun.rasi') end,
               {description = "Launch Rofi start menu", group = "awesome"}),
+
+    awful.key({ modkey,           }, "a", function () tagmenu:show() end,
+              {description = "show taglist menu", group = "awesome"}),
 
     awful.key({modkey,            }, ".", function () awful.spawn.with_shell("bash $HOME/bin/scripts/volume.sh up") end,
               {description = "Volume Up", group = "Audio"}),
