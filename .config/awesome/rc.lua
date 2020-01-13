@@ -28,6 +28,16 @@ beautiful.init(theme_dir .. "custom/theme.lua")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local notification_center = require("notif-center")
+
+--UNCOMMENT WHEN UPDATED TO CORRECT VERSION OF AWESOME
+-- request::display signal listener
+--naughty.connect_signal('request::display', function(n)
+--    naughty.layout.box {notification = n}
+--    if _G.panel_visible or _G.dont_disturb then
+--      naughty.destroy_all_notifications()
+--    end
+--  end)
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -100,18 +110,24 @@ mydisplaymenu = {
    { "Clone Primary Display", function() awful.spawn.with_shell("bash ~/.screenlayout/cloneonce.sh") end},
 }
 
---tagmenu = awful.menu( { items =
---   { "Home", function() end},
---   { "Terminal", function() end},
---   { "Browser", function() end},
---   { "Editors", function() end},
---   { "Messaging", function() end},
---   { "Media", function() end} 
--- })
+function switch_tag(n) 
+    t=awful.screen.focused().tags[n]
+    t:view_only()
+  end 
+tagmenu = awful.menu({ items = {
+   { "Home", function() switch_tag(1) end},
+   { "Terminal", function() switch_tag(2) end},
+   { "Browser", function() switch_tag(3) end},
+   { "Editors", function() switch_tag(4) end},
+   { "Messaging", function() switch_tag(5) end},
+   { "Media", function() switch_tag(6) end} 
+ } })
+
 
 mymainmenu = awful.menu(
 { items = 
-  { 
+  {
+    --{ "Tags", tagmenu, beautiful.awesome_icon },
     { "Session", myawesomemenu, beautiful.awesome_icon },
     { "Display Profiles", mydisplaymenu },
     { "Open Terminal", terminal }
@@ -362,9 +378,10 @@ awful.screen.connect_for_each_screen(function(s)
             s.systray, 
             spacer,
             s.mylayoutbox,
+            notification_center,
         },
     }
-end)
+  end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
