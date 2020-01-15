@@ -19,8 +19,8 @@ local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightne
 local switcher = require("awesome-switcher")
 -- default xrandr config
 awful.spawn.with_shell("nm-applet &")
---awful.spawn.with_shell("ulauncher --hide-window &")
 awful.spawn.with_shell("compton &")
+awful.spawn.with_shell("source $HOME/.config/awesome/systray.sh &")
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(theme_dir .. "custom/theme.lua")
 
@@ -53,6 +53,7 @@ editor_cmd = terminal .. " -e " .. editor
 
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 modkey = "Mod4"
+altkey = "Mod1"
 
 
 --------------------Error Handling--------------------
@@ -110,6 +111,7 @@ mydisplaymenu = {
    { "Clone Primary Display", function() awful.spawn.with_shell("bash ~/.screenlayout/cloneonce.sh") end},
 }
 
+-- Graphical tag switching list --
 function switch_tag(n) 
     t=awful.screen.focused().tags[n]
     t:view_only()
@@ -123,11 +125,9 @@ tagmenu = awful.menu({ items = {
    { "Media", function() switch_tag(6) end} 
  } })
 
-
 mymainmenu = awful.menu(
 { items = 
   {
-    --{ "Tags", tagmenu, beautiful.awesome_icon },
     { "Session", myawesomemenu, beautiful.awesome_icon },
     { "Display Profiles", mydisplaymenu },
     { "Open Terminal", terminal }
@@ -140,6 +140,7 @@ mymainmenu = awful.menu(
 -- Awesome launcher widget
 mylauncher = awful.widget.launcher({ image = beautiful.down_arrow,
                                      menu = mymainmenu })
+
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -262,7 +263,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
-        filter  = awful.widget.taglist.filter.noempty,
+        filter  = awful.widget.taglist.filter.selected,
         buttons = taglist_buttons
     }
 
@@ -413,21 +414,21 @@ globalkeys = gears.table.join(
         {description = "focus next by index", group = "client"}
     ),
 
-    awful.key({ "Mod1",           }, "Tab",
+    awful.key({ altkey,           }, "Tab",
       function ()
-          switcher.switch( 1, "Mod1", "Alt_L", "Shift", "Tab")
+          switcher.switch( 1, altkey, "Alt_L", "Shift", "Tab")
       end),
    
-    awful.key({ "Mod1",           }, "s",
+    awful.key({ altkey,           }, "s",
       function ()
         awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
       end,
               {description = "Toggle systray", group = "awesome"}
       ),
 
-    awful.key({ "Mod1", "Shift"   }, "Tab",
+    awful.key({ altkey, "Shift"   }, "Tab",
       function ()
-          switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab")
+          switcher.switch(-1, altkey, "Alt_L", "Shift", "Tab")
       end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
@@ -436,7 +437,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "d", function () awful.spawn.with_shell('rofi -show drun -theme ' .. home_dir .. '/.config/awesome/config/appmenu/drun.rasi') end,
               {description = "Launch Rofi start menu", group = "awesome"}),
 
-    awful.key({ modkey,           }, "a", function () tagmenu:show() end,
+    awful.key({ altkey,           }, "w", function () tagmenu:show() end,
               {description = "show taglist menu", group = "awesome"}),
 
     awful.key({modkey,            }, ".", function () awful.spawn.with_shell("bash $HOME/bin/scripts/volume.sh up") end,
