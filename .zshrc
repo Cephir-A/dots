@@ -109,6 +109,8 @@ export GOPATH=$HOME/Documents/Git/Personal/go
 export TERM="xterm-256color"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias get_deps='source $HOME/.config/awesome/get_deps.sh'
+alias reshistory='reshctl enable ctrl_r_binding'
+
 
 eval "$(ssh-agent)"
 
@@ -121,3 +123,5 @@ clear
 export SDKMAN_DIR="/home/joseph/.sdkman"
 [[ -s "/home/joseph/.sdkman/bin/sdkman-init.sh" ]] && source "/home/joseph/.sdkman/bin/sdkman-init.sh"
 
+
+[ -f ~/.resh/shellrc ] && source ~/.resh/shellrc

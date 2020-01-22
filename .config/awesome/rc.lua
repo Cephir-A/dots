@@ -32,12 +32,18 @@ local notification_center = require("notif-center")
 
 --UNCOMMENT WHEN UPDATED TO CORRECT VERSION OF AWESOME
 -- request::display signal listener
---naughty.connect_signal('request::display', function(n)
---    naughty.layout.box {notification = n}
---    if _G.panel_visible or _G.dont_disturb then
---      naughty.destroy_all_notifications()
---    end
---  end)
+naughty.connect_signal('request::display', function(n)
+    naughty.layout.box {notification = n}
+    if _G.panel_visible or _G.dont_disturb then
+      naughty.destroy_all_notifications()
+    end
+
+    if not _G.dont_disturb then
+  -- Add Sound fx to notif
+  -- Depends: canberra-gtk-play
+      awful.spawn('canberra-gtk-play -i message', false)
+    end
+  end)
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -263,7 +269,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
-        filter  = awful.widget.taglist.filter.selected,
+        filter  = awful.widget.taglist.filter.noempty,
         buttons = taglist_buttons
     }
 
@@ -672,6 +678,7 @@ awful.rules.rules = {
           "pinentry",
         },
         class = {
+          "latte-dock",
           "Ulauncher",
           "Arandr",
           "Blueman-manager",
@@ -698,7 +705,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule = {}, 
-      except_any = { class = {"conky", "Nautilus", "Toolbox" }},
+      except_any = { class = {"conky", "Nautilus", "Toolbox", "latte-dock" }},
       properties = { titlebars_enabled = true }
     },
 
@@ -746,12 +753,12 @@ client.connect_signal("request::titlebars", function(c)
 
 
     awful.titlebar(c, {
-      size = 30,
+      size = 24,
     }) : setup {
         { -- Left
             awful.titlebar.widget.closebutton    (c),
-            awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.minimizebutton (c),
+            awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.stickybutton   (c),
             layout = wibox.layout.fixed.horizontal()
         },
