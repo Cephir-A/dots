@@ -1,0 +1,25 @@
+[1]
+Description=Settings for kitty
+desktop=2
+desktoprule=3
+types=1
+wmclass=kitty
+wmclasscomplete=false
+wmclassmatch=1
+
+[General]
+ColorScheme[$d]
+count=1
+fixed[$d]
+font[$d]
+menuFont[$d]
+smallestReadableFont[$d]
+toolBarFont[$d]
+widgetStyle[$d]
+
+[Icons]
+Theme[$d]
+
+[KDE]
+ColorScheme[$d]
+widgetStyle[$d]
