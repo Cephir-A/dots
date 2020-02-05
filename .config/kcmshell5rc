@@ -1,0 +1,10 @@
+[DownloadDialog Settings]
+Height 1080=498
+Width 1920=700
+
+[KFileDialog Settings]
+Recent Files[$e]=transparent_panel.kwinscript,file:$HOME/.kde/Autostart/disable_panel_shadow.sh,file:$HOME/.scripts/transparent_panel.kwinscript
+Recent URLs[$e]=file:$HOME/.kde/Autostart/
+detailViewIconSize=0
+iconViewIconSize=43
+listViewIconSize=15

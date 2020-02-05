@@ -105,6 +105,10 @@ ForegroundNormal=223,223,223
 ForegroundPositive=1,162,153
 ForegroundVisited=0,188,212
 
+[DirSelect Dialog]
+DirSelectDialog Size=850,568
+History Items[$e]=file:$HOME/theme/Materia,file:$HOME/.local/share/plasma/desktoptheme/,file:$HOME/.local/share/plasma/
+
 [General]
 ColorScheme=MateriaDark
 Name[en_GB]=Breeze Dark
@@ -120,7 +124,7 @@ LookAndFeelPackage=com.github.varlesh.materia
 ShowIconsInMenuItems=true
 ShowIconsOnPushButtons=true
 contrast=4
-widgetStyle=adwaita-dark
+widgetStyle=kvantum-dark
 
 [KFileDialog Settings]
 Allow Expansion=false
@@ -131,15 +135,15 @@ LocationCombo Completionmode=5
 PathCombo Completionmode=5
 Show Bookmarks=false
 Show Full Path=false
-Show Inline Previews=true
+Show Inline Previews=false
 Show Preview=false
 Show Speedbar=true
-Show hidden files=false
+Show hidden files=true
 Sort by=Name
 Sort directories first=true
 Sort reversed=false
 Speedbar Width=160
-View Style=DetailTree
+View Style=Simple
 
 [KScreen]
 ScaleFactor=1
