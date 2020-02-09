@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + w
-  rofi -show drun
+  rofi -show drun -theme $HOME/.config/rofi/drun.rasi
 
 
 # make sxhkd reload its configuration files:
@@ -125,3 +125,6 @@ super + {Left,Down,Up,Right}
 super + x
   source $HOME/.scripts/lock.sh
 
+# Print screen to clipboard.
+@Print
+  maim -s | xclip -selection clipboard -t image/png
