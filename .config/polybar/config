@@ -19,11 +19,11 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #222
-background-alt = #444
+background-alt = #268
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
-underline = #AA0000
+underline = #0066AA
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -43,11 +43,14 @@ foreground = ${colors.foreground}
 line-size = 4
 line-color = #f00
 
-border-size = 5
-border-color = #00000000
+margin-top = 0
+margin-bottom = 0
 
-padding-left = 5
-padding-right = 5
+border-size = 3
+border-color = ${colors.background}
+
+padding-left = 3
+padding-right = 0
 
 module-margin-left = 1
 module-margin-right = 2
@@ -84,22 +87,7 @@ label = %title:0:30:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.underline}
-
-label-layout = %layout%
-label-layout-underline = ${colors.underline}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-
-[module/filesystem]
-type = internal/fs
+blacklist-0 = num locmodule/filesystem]
 interval = 25
 
 mount-0 = /
@@ -111,22 +99,29 @@ label-unmounted-foreground = ${colors.foreground-alt}
 [module/bspwm]
 type = internal/bspwm
 
-label-focused = %index%
+ws-icon-0 = I;I  
+ws-icon-1 = II;II 
+ws-icon-2 = III;III
+ws-icon-3 = IV;IV 
+ws-icon-4 = V;V  
+ws-icon-5 = VI;VI 
+ws-icon-default = WS
+
+label-focused = %icon%
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.underline}
 label-focused-padding = 4
 
-label-occupied = %index%
+label-occupied = %icon%
 label-occupied-padding = 4
 
-label-urgent = %index%!
+label-urgent = %icon%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 4
 
-label-empty = %index%
+label-empty = __
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 4
-
 ; Separator in between workspaces
 ; label-separator = |
 
@@ -335,10 +330,10 @@ adapter = ADP1
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging-underline = #00a24a
 
 format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+format-discharging-underline = ${colors.underline}
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
@@ -418,7 +413,7 @@ screenchange-reload = true
 ;pseudo-transparency = false
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 0
+margin-bottom = 0
 
 ; vim:ft=dosini

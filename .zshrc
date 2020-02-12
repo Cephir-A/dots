@@ -123,5 +123,4 @@ clear
 export SDKMAN_DIR="/home/joseph/.sdkman"
 [[ -s "/home/joseph/.sdkman/bin/sdkman-init.sh" ]] && source "/home/joseph/.sdkman/bin/sdkman-init.sh"
 
-
-[ -f ~/.resh/shellrc ] && source ~/.resh/shellrc
+#[ -f ~/.resh/shellrc ] && source ~/.resh/shellrc

@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + w
-  rofi -show drun -theme $HOME/.config/rofi/drun.rasi
+  rofi -show drun # -theme $HOME/.config/rofi/drun.rasi
 
 
 # make sxhkd reload its configuration files:
@@ -128,3 +128,27 @@ super + x
 # Print screen to clipboard.
 @Print
   maim -s | xclip -selection clipboard -t image/png
+
+# Print screen options
+#ctrl + @Print
+#  rofi -show drun #placeholder
+
+## Audio controls (Playerctl/Alsa)
+XF86Audio{RaiseVolume,LowerVolume}
+  {bash $HOME/bin/scripts/volume.sh up, bash $HOME/bin/scripts/volume.sh down}
+
+# Mute Audio
+XF86AudioMute
+  amixer set Master toggle
+
+# Play next song
+XF86AudioNext
+  playerctl next
+
+# Play previous song
+XF86AudioPrev
+  playerctl previous
+
+# Toggle pause/play
+XF86AudioPlay
+  sh $HOME/.scripts/togglePause.sh

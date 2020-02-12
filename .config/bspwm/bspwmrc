@@ -6,12 +6,12 @@ bspc monitor -d I II III IV V VI
 
 compton &
 feh --bg-fill $HOME/Pictures/wallpaper.jpg
-
+dunst &
 
 bspc config border_width         2
-bspc config window_gap          12
+bspc config window_gap          0
 
-bspc config split_ratio          0.52
+bspc config split_ratio          0.5
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
@@ -20,6 +20,8 @@ bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+bspc rule -a blueman-manager state=floating
 
 # Status bar
-source $HOME/.scripts/polybar_start.sh
+sh $HOME/.scripts/polybar_start.sh
+sh $HOME/.scripts/local/init.sh
