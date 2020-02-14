@@ -4,10 +4,6 @@ sxhkd &
 
 bspc monitor -d I II III IV V VI
 
-compton &
-feh --bg-fill $HOME/Pictures/wallpaper.jpg
-dunst &
-
 bspc config border_width         2
 bspc config window_gap          0
 
@@ -21,6 +17,10 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a blueman-manager state=floating
+
+compton &
+feh --bg-fill $HOME/Pictures/wallpaper.jpg
+dunst &
 
 # Status bar
 sh $HOME/.scripts/polybar_start.sh
