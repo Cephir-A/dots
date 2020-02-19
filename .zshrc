@@ -102,7 +102,7 @@ alias ohmyzsh="nvim ~/.oh-my-zsh"
 
 alias vim="nvim"
 
-export PATH="$PATH:$HOME/.local/bin/:$HOME/bin/scripts":$HOME/.cargo/bin:$HOME/Documents/Git/Personal/go/bin/:$HOME/.local/share/activemq-5.16.0/bin/linux-x86_64;
+export PATH="$PATH:$HOME/.local/bin/:$HOME/bin/scripts":$HOME/.cargo/bin:$HOME/Documents/Git/Personal/go/bin/:$HOME/.local/share/activemq-5.16.0/bin/linux-x86_64:$HOME/.scripts/;
 export _JAVA_AWT_WM_NONREPARENTING=1;
 export INSTALL4J_JAVA_HOME=$JAVA_HOME;
 export GOPATH=$HOME/Documents/Git/Personal/go

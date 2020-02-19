@@ -18,7 +18,7 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222
+background = #FF222222
 background-alt = #268
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -46,7 +46,7 @@ line-color = #f00
 margin-top = 0
 margin-bottom = 0
 
-border-size = 3
+border-size = 4
 border-color = ${colors.background}
 
 padding-left = 0
@@ -55,16 +55,18 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
+font-0 = fixed:pixelsize=11;3
 font-1 = Unifont:style=Sans-Serif
-font-2 = siji:pixelsize=10;1
+font-2 = FontAwesome:style=Regular:pixelsize=13;3
+
 
 modules-left = arch bspwm xkeyboard pulseaudio 
-modules-center = mpd
-modules-right = filesystem xbacklight memory cpu wlan eth temperature battery date powermenu
+modules-center = mpd playerctl
+modules-right = filesystem xbacklight memory cpu wlan eth battery date powermenu
 
 tray-position = right
-tray-padding = 2
+tray-padding = 3
+tray-background = ${colors.background-alt}
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -82,12 +84,12 @@ cursor-scroll = ns-resize
 
 [module/arch]
 type = custom/text
-content = BSPWM
+content =  
 ;alt-icon = 
 content-padding = 3
 content-background = ${colors.background-alt}
 content-foreground = ${colors.foreground}
-click-left = rmenu_g
+click-left = rofi -show drun
 click-middle = rfull
 click-right = rmenu_wi_g
 
@@ -102,7 +104,7 @@ interval = 25
 
 mount-0 = /
 
-label-layout = xkb: %name%
+label-layout =   %name%
 label-layout-padding = 3
 label-layout-background = ${colors.background-alt} 
 
@@ -215,20 +217,20 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
 format-background = ${colors.background-alt}
 format-padding = 3
-label = CPU: %percentage:2%%
+label =  %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground}
 format-background = ${colors.background-alt}
 format-padding = 3
-label = Memory: %percentage_used%%
+label =  %percentage_used%%
 
 [module/wlan]
 type = internal/network
@@ -273,13 +275,13 @@ type = internal/date
 interval = 5
 
 date =
-date-alt = Date: " %Y-%m-%d"
+date-alt = " %Y-%m-%d"
 
-time = Time: %H:%M
+time =  %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix =  
+format-prefix-foreground = ${colors.foreground}
 format-background = ${colors.background-alt}
 format-padding = 5
 
@@ -288,12 +290,16 @@ label = %date% %time%
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+format-volume = <label-volume> 
+label-volume =   %percentage%%
 label-volume-foreground = ${root.foreground}
+label-volume-background = #00a24a
+label-volume-padding = 3
 
-label-muted = 🔇 muted
-label-muted-foreground = #666
+label-muted =  muted
+label-muted-foreground = #AAA
+label-muted-background = ${colors.background-alt}
+label-muted-padding = 3
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -343,46 +349,51 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/battery]
 type = internal/battery
 battery = BAT0
-adapter = ADP1
+adapter = AC
 full-at = 98
 
-format-charging = Charging: <animation-charging> <label-charging>
+format-charging = <animation-charging>  <label-charging>
 format-charging-underline = #00a24a
 
 format-charging-background = #00a24a
 format-charging-padding = 5
 
-format-discharging = Discharging: <animation-discharging> <label-discharging>
+format-discharging = <animation-discharging>  <label-discharging>
 format-discharging-background = #ba8c00
 format-discharging-padding = 5
 
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+format-full-prefix = "  "
+format-full-prefix-foreground = ${colors.foreground}
+format-full-background = #00a24a
+format-full-padding = 5
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
+ramp-capacity-0 =   
+ramp-capacity-1 =   
+ramp-capacity-2 =   
 ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-0 =     
+animation-charging-1 =   
+animation-charging-2 =   
+animation-charging-3 =   
+animation-charging-4 =   
+animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-0 =   
+animation-discharging-1 =   
+animation-discharging-2 =   
+animation-discharging-3 =   
+animation-discharging-4 =   
+animation-discharging-foreground = ${colors.foreground}
 animation-discharging-framerate = 750
 
-[module/temperature]
+[module/nemperature]
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format = Temp: <ramp> <label>
+format =  <ramp> <label>
 format-warn = ALERT <ramp> <label-warn>
 format-warn-background = ${colors.underline}
 format-background = ${colors.background-alt}
@@ -425,6 +436,13 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+[module/playerctl]
+type = custom/script
+exec = ~/.scripts/polybar_playerctl.sh
+format-background = #00a24a
+format-padding = 3
+click-left = sh ~/.scripts/togglePause.sh
 
 [settings]
 screenchange-reload = true
