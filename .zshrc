@@ -105,8 +105,10 @@ alias vim="nvim"
 export PATH="$PATH:$HOME/.local/bin/:$HOME/bin/scripts":$HOME/.cargo/bin:$HOME/Documents/Git/Personal/go/bin/:$HOME/.local/share/activemq-5.16.0/bin/linux-x86_64:$HOME/.scripts/;
 export _JAVA_AWT_WM_NONREPARENTING=1;
 export INSTALL4J_JAVA_HOME=$JAVA_HOME;
-export GOPATH=$HOME/Documents/Git/Personal/go
+export GOPATH=$HOME/Git/go
 export TERM="xterm-256color"
+export LC_CTYPE="en_US.UTF-8"
+
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias get_deps='source $HOME/.config/awesome/get_deps.sh'
 alias reshistory='reshctl enable ctrl_r_binding'
