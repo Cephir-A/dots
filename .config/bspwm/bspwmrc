@@ -2,6 +2,9 @@
 #
 # BSPWM Configuration
 
+# Run system specific startups.
+sh $HOME/.scripts/local/init.sh
+
 # Simple X hotkey Daemon init.
 sxhkd &
 
@@ -37,5 +40,3 @@ dunst &
 # Status bar.
 sh $HOME/.scripts/polybar_start.sh
 
-# Run system specific startups.
-sh $HOME/.scripts/local/init.sh
