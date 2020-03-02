@@ -152,3 +152,7 @@ XF86AudioPrev
 # Toggle pause/play
 XF86AudioPlay
   sh $HOME/.scripts/togglePause.sh
+
+# Brightness controls
+XF86MonBrightness{Up,Down}
+  {sh light -A 5, sh light -U 5}

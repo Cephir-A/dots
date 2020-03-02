@@ -25,7 +25,7 @@ bspc config remove_unplugged_monitors true
 
 # Rules.
 bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2' border=off
+bspc rule -a Chromium-browser desktop='^2' border=off
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
@@ -34,7 +34,7 @@ bspc rule -a Firefox border=off
 
 # Universal service startups that are required on all my PC's.
 compton &
-feh --bg-fill $HOME/Pictures/wallpaper.jpg
+feh --bg-fill $HOME/Pictures/wallpapers/wallpaper.jpg
 dunst &
 
 # Status bar.
