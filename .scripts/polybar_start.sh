@@ -10,10 +10,10 @@ else
   polybar --reload top &  
 fi 
 
-#if type "xrandr"; then
-#  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-#    MONITOR=$m polybar bottom &
-#  done
-#else
-#  polybar --reload bottom &  
-#fi 
+if type "xrandr"; then
+  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+    MONITOR=$m polybar bottom &
+  done
+else
+  polybar --reload bottom &  
+fi 

@@ -39,6 +39,10 @@ super + y
 super + g
 	bspc node -s biggest
 
+# display layouts menu
+super + d
+  sh $HOME/.scripts/display-menu.sh
+
 #
 # state/flags
 #
@@ -152,3 +156,7 @@ XF86AudioPrev
 # Toggle pause/play
 XF86AudioPlay
   sh $HOME/.scripts/togglePause.sh
+
+# Brightness controls
+XF86MonBrightness{Up,Down}
+  {sh light -A 5, sh light -U 5}
