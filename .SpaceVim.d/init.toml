@@ -35,18 +35,20 @@ spacevim_autocomplete_method = "deoplete"
 #  merged = 0
 
 [[layers]]
+name = "denite"
+
+[[layers]]
   name = "checkers"
   name = "debug"
   name = "lang#rust"
-  name = "lang#javascript"
-  name = "lang#WebAssembly"
-  name = "lang#kotlin"
-  name = "lang#java"
-  name = "lang#lua"
-  name = "denite"
+
 
 [[layers]]
   name = "lang#go"
+
+[[layers]]
+  name = "lang#html"
+  name = "lang#javascript"
 
 [[layers]]
 name = 'shell'
