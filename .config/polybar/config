@@ -173,7 +173,7 @@ label-layout-background = ${colors.background-alt}
 
 label-indicator = %name%
 label-indicator-background = ${colors.background-alt}
-label-indicator-padding = 3 
+label-indicator-padding = 3
 
 [module/bspwm]
 type = internal/bspwm

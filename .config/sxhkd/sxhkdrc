@@ -39,6 +39,10 @@ super + y
 super + g
 	bspc node -s biggest
 
+# display layouts menu
+super + d
+  sh $HOME/.scripts/display-menu.sh
+
 #
 # state/flags
 #
