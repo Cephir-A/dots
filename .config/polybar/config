@@ -115,7 +115,7 @@ font-1 = Unifont:style=Sans-Serif
 font-2 = FontAwesome:style=Regular:pixelsize=13;3
 
 
-modules-left = pad arch pad xkeyboard pad 
+modules-left = pad arch exit pad xkeyboard pad 
 modules-center =  
 modules-right = pad bspwm pad time date pad
 
@@ -148,6 +148,17 @@ click-left = rofi -show drun
 click-middle = rfull
 click-right = rmenu_wi_g
 
+[module/exit]
+type = custom/text
+content =   
+;alt-icon = 
+content-padding = 3
+content-background = ${colors.background-alt}
+content-foreground = ${colors.foreground}
+click-left = rofi -show drun
+click-middle = rfull
+click-right = rmenu_wi_g
+
 [module/pad]
 type = custom/text
 content =  .     
@@ -159,6 +170,9 @@ content-foreground = ${colors.background}
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
+label-maxlen = 100
+format-foreground = #FFFFFF
+format-padding = 3
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -197,7 +211,7 @@ label-focused-padding = 4
 label-occupied = %icon%
 label-occupied-padding = 4
 
-label-urgent = %icon%!
+label-urgent = %icon%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 4
 
