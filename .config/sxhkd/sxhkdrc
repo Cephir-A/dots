@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + w
-  rofi -modi drun,run -show drun -show-icons # -theme $HOME/.config/rofi/drun.rasi
+  rofi -modi drun,run -show drun -show-icons -font "Notosans 12" # -theme $HOME/.config/rofi/drun.rasi
 
 
 # make sxhkd reload its configuration files:
@@ -18,6 +18,10 @@ super + Escape
 #
 # bspwm hotkeys
 #
+
+# focus the next/previous desktop in the current monitor
+super + {Left,Right}
+    bspc monitor -f {prev,next}
 
 # quit/restart bspwm
 super + alt + {q,r}
@@ -42,6 +46,14 @@ super + g
 # display layouts menu
 super + d
   sh $HOME/.scripts/display-menu.sh
+
+# switch wallpaper
+super + ctrl + d
+  sh $HOME/.scripts/wallpaper-menu.sh
+  
+# clipboard manager
+super + c
+  zsh $HOME/.scripts/clipboard.sh
 
 #
 # state/flags
@@ -130,8 +142,11 @@ super + x
   source $HOME/.scripts/lock.sh
 
 # Print screen to clipboard.
-@Print
+super + u
   maim -s | xclip -selection clipboard -t image/png
+
+super + v
+  cat ~/.config/sxhkd/sxhkdrc | awk '/^[a-z]/ && last {print $0,"\t",last} {last=""} /^#/{last=$0}' | column -t -s $'\t' | rofi -show -dmenu
 
 # Print screen options
 #ctrl + @Print

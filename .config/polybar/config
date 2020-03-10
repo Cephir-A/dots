@@ -63,7 +63,7 @@ font-2 = FontAwesome:style=Regular:pixelsize=13;3
 
 modules-left = pad playerctl pulseaudio pad
 modules-center = xwindow 
-modules-right = pad xbacklight memory cpu wlan eth battery powermenu pad
+modules-right = pad screen memory cpu wlan eth battery powermenu pad
 
 tray-padding = 3
 tray-background = ${colors.background-alt}
@@ -288,6 +288,16 @@ bar-fill-foreground = #9f78e1
 bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
+
+[module/screen]
+type = custom/script
+exec = echo "  $(light | cut -d. -f1)%"
+scroll-up = light -A 5
+scroll-down = light -U 5
+interval = 1
+format-background = ${colors.background-alt}
+format-prefix =  
+format-padding = 3
 
 [module/backlight-acpi]
 inherit = module/xbacklight

@@ -53,3 +53,6 @@ name = 'shell'
 default_position = 'top'
 default_height = 30
 
+[[layers]]
+name = "fzf"
+
