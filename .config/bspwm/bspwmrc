@@ -13,9 +13,23 @@ bspc monitor -d I II III IV V VI
 
 # Border and gaps settings.
 bspc config border_width         2
+bspc config normal_border_color "#363636"
+bspc config focused_border_color "#767676"
+bspc config urgent_border_color "#B58900"
+bspc config presel_border_color "#26E2FF"
+
+bspc config top_padding        24
+bspc config bottom_padding     0
+bspc config left_padding       0
+bspc config right_padding      0
+
 bspc config window_gap          7
 
 bspc config split_ratio          0.5
+bspc config auto_alternate true
+bspc config auto_cancel true
+bspc config initial_polarity first_child
+
 bspc config borderless_monocle   true
 bspc config gapless_monocle      false
 
@@ -34,8 +48,10 @@ bspc rule -a Firefox border=off
 
 # Universal service startups that are required on all my PC's.
 compton &
-feh --bg-fill $HOME/Pictures/wallpapers/wallpaper.jpg
 dunst &
+
+# Wallpaper
+sh $HOME/.scripts/wallpaper.sh
 
 # Status bar.
 sh $HOME/.scripts/polybar_start.sh

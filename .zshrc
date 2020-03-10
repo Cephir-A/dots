@@ -108,11 +108,11 @@ export INSTALL4J_JAVA_HOME=$JAVA_HOME;
 export GOPATH=$HOME/Git/go
 export TERM="xterm-256color"
 export LC_CTYPE="en_US.UTF-8"
+export CM_LAUNCHER="rofi"
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias get_deps='source $HOME/.config/awesome/get_deps.sh'
 alias reshistory='reshctl enable ctrl_r_binding'
-
 
 eval "$(ssh-agent)"
 

@@ -1,0 +1,7 @@
+alias aml-itis-ea-sql="ssh -i ~/pems/aml-itis-ea.pem ec2-user@54.171.81.183"
+alias set_debug_port="export  MAVEN_OPTS=\"-Xmx2048M -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n\""
+alias blais="mvn clean install -Prun -DskipTests -Dfindbugs.skip -Dpmd.skip -Dcpd.skip -Dspring.profiles.active=dev -Djetty.port=8080"
+alias blaise-local="java -jar $HOME/Documents/Git/Projects/blaise-sdk/blaise-cli/target/blaise-cli.jar -url https://localhost:8080/cms -p mtuaoi -u joseph.lawton"
+alias amq="bash $HOME/.local/share/activemq-5.16.0/bin/linux-x86-64/activemq"
+alias blaise-watch="zsh $HOME/.scripts/blaise-watch.sh"
+export BLAISE_ROOT=$HOME/Git/Cognitran/
