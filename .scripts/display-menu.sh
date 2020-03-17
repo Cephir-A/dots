@@ -1,3 +1,2 @@
-option=`ls $HOME/.screenlayout | rofi -dmenu`
-sh $HOME/.screenlayout/$option
+sh $HOME/.screenlayout/$(ls $HOME/.screenlayout | rofi -dmenu)
 

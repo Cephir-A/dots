@@ -10,6 +10,9 @@ super + Return
 super + w
   rofi -modi drun,run -show drun -show-icons -font "Notosans 12" # -theme $HOME/.config/rofi/drun.rasi
 
+# window switcher
+super + ctrl + w
+  rofi -show
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -171,6 +174,9 @@ XF86AudioPrev
 # Toggle pause/play
 XF86AudioPlay
   sh $HOME/.scripts/togglePause.sh
+
+XF86AudioStop
+  playerctl stop
 
 # Brightness controls
 XF86MonBrightness{Up,Down}
