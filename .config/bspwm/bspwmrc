@@ -2,14 +2,14 @@
 #
 # BSPWM Configuration
 
-# Run system specific startups.
-sh $HOME/.scripts/local/init.sh
-
 # Simple X hotkey Daemon init.
 sxhkd &
 
 # Set up tags.
 bspc monitor -d I II III IV V VI
+
+# Run system specific startups.
+sh $HOME/.scripts/local/init.sh
 
 # Border and gaps settings.
 bspc config border_width         2
@@ -44,6 +44,7 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Blueman-manager state=floating
+bspc rule -a TelegramDesktop state=pseudo_tiled
 bspc rule -a Firefox border=off
 
 # Universal service startups that are required on all my PC's.

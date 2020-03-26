@@ -1,1 +1,1 @@
-feh --bg-fill /home/joseph/Pictures/wallpapers/mmx-zero.jpg
+feh --bg-fill /home/joseph/Pictures/wallpapers/P3mc.png
