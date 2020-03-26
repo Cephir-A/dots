@@ -10,6 +10,7 @@ bspc monitor -d I II III IV V VI
 
 # Run system specific startups.
 sh $HOME/.scripts/local/init.sh
+sh $HOME/.scripts/local/monitors.sh
 
 # Border and gaps settings.
 bspc config border_width         2
