@@ -5,6 +5,9 @@
 # Simple X hotkey Daemon init.
 sxhkd &
 
+# Display configs
+autorandr --load $(autorandr --detected)
+
 # Set up tags.
 bspc monitor -d I II III IV V VI
 
@@ -46,11 +49,12 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Blueman-manager state=floating
 bspc rule -a TelegramDesktop state=pseudo_tiled
+bspc rule -a Spotify state=pseudo_tiled
 bspc rule -a Firefox border=off
 
 # Universal service startups that are required on all my PC's.
 compton &
-dunst &
+deadd-notification-center &
 
 # Wallpaper
 sh $HOME/.scripts/wallpaper.sh

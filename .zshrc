@@ -119,6 +119,15 @@ eval "$(ssh-agent)"
 source $HOME/.ssh/identities
 source $HOME/.scripts/work
 
+alias maven="command mvn"
+notified_maven() {
+  maven $* | tee ~/log.txt | \
+  perl -pe'$m|=/BUILD .*SUCCESS/; END {exit!$m}' && \
+  notify-send --icon=face-cool "`basename $(pwd)`: mvn $*" "Build SUCCESS" || \
+  notify-send --icon=face-crying "`basename $(pwd)`: mvn $*" "Build FAILED"
+}
+#alias mvn=notified_maven
+
 clear
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!

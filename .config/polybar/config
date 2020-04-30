@@ -21,6 +21,8 @@
 background = #FF222222
 background-clear = #00000000
 background-alt = #268
+;#ad291a 
+;#268
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
@@ -115,7 +117,7 @@ font-1 = Unifont:style=Sans-Serif
 font-2 = FontAwesome:style=Regular:pixelsize=13;3
 
 
-modules-left = pad arch exit pad xkeyboard pad 
+modules-left = pad xkeyboard pad 
 modules-center =  
 modules-right = pad bspwm pad time date pad
 
@@ -205,7 +207,7 @@ label-occupied-background = ${colors.background}
 label-dimmed-focused-background = ${colors.background}
 label-focused = %icon%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.underline}
+;label-focused-underline= ${colors.underline}
 label-focused-padding = 4
 
 label-occupied = %icon%

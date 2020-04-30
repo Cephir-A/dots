@@ -8,15 +8,15 @@ super + Return
 
 # program launcher
 super + w
-  rofi -modi drun,run -show drun -show-icons -font "Notosans 12" # -theme $HOME/.config/rofi/drun.rasi
+  rofi -modi drun,run -show drun -show-icons -font "Notosans 12" -theme $HOME/.config/rofi/launchers/kde_krunner.rasi
 
 # window switcher
 super + ctrl + w
-  rofi -show
+  rofi -show -theme $HOME/.config/rofi/launchers/kde_krunner.rasi 
 
 # Command runner
 super + alt + w
-  rofi -show run
+  rofi -show run -theme $HOME/.config/rofi/launchers/kde_krunner.rasi
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -79,8 +79,8 @@ super + ctrl + {m,v,y,z}
 #
 
 # focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+#super + {_,shift + }{h,j,k,l}
+#	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
 super + {p,b,comma,period}
@@ -158,6 +158,14 @@ super + v
 # Print screen options
 #ctrl + @Print
 #  rofi -show drun #placeholder
+
+# notification center
+super + n
+  kill -s USR1 $(pidof deadd-notification-center)
+
+# reload notification center
+super + ctrl + n
+  killall deadd-notification-center && deadd-notification-center
 
 ## Audio controls (Playerctl/Alsa)
 XF86Audio{RaiseVolume,LowerVolume}
