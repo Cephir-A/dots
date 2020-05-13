@@ -6,14 +6,14 @@
 sxhkd &
 
 # Display configs
-autorandr --load $(autorandr --detected)
+#autorandr --load $(autorandr --detected)
 
 # Set up tags.
 bspc monitor -d I II III IV V VI
 
 # Run system specific startups.
 sh $HOME/.scripts/local/init.sh
-sh $HOME/.scripts/local/monitors.sh
+#sh $HOME/.scripts/local/monitors.sh
 
 # Border and gaps settings.
 bspc config border_width         2
@@ -38,8 +38,8 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      false
 
 # Multihead behavior
-bspc config remove_disabled_monitors true
-bspc config remove_unplugged_monitors true
+bspc config remove_unplugged_monitors	false
+bspc config remove_disabled_monitors	false
 
 # Rules.
 bspc rule -a Gimp desktop='^8' state=floating follow=on

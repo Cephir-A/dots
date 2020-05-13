@@ -102,7 +102,7 @@ alias ohmyzsh="nvim ~/.oh-my-zsh"
 
 alias vim="nvim"
 
-export PATH="$PATH:$HOME/.local/bin/:$HOME/bin/scripts":$HOME/.cargo/bin:$HOME/Documents/Git/Personal/go/bin/:$HOME/.local/share/activemq-5.16.0/bin/linux-x86_64:$HOME/.scripts/:$HOME/.screenlayout/;
+export PATH="$PATH:$HOME/.local/bin/:$HOME/bin/scripts":$HOME/.cargo/bin:$HOME/Documents/Git/Personal/go/bin/:$HOME/.local/share/activemq-5.16.0/bin/linux-x86_64:$HOME/.scripts/:$HOME/.screenlayout/:/var/lib/snapd/snap/bin;
 export _JAVA_AWT_WM_NONREPARENTING=1;
 export INSTALL4J_JAVA_HOME=$JAVA_HOME;
 export GOPATH=$HOME/Git/go
@@ -120,14 +120,10 @@ source $HOME/.ssh/identities
 source $HOME/.scripts/work
 
 alias maven="command mvn"
-notified_maven() {
-  maven $* | tee ~/log.txt | \
-  perl -pe'$m|=/BUILD .*SUCCESS/; END {exit!$m}' && \
-  notify-send --icon=face-cool "`basename $(pwd)`: mvn $*" "Build SUCCESS" || \
-  notify-send --icon=face-crying "`basename $(pwd)`: mvn $*" "Build FAILED"
+logged_maven() {
+  maven $* | tee ~/log.txt 
 }
-#alias mvn=notified_maven
-
+alias mvn=logged_maven
 clear
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
