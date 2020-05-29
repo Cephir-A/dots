@@ -59,6 +59,4 @@ default_height = 30
 name = "fzf"
 
 [[layers]]
-  name = "lang#markdown"
-
-
+  name = "lang#ruby"

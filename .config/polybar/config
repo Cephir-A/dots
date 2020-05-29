@@ -19,12 +19,12 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #FF222222
-background-clear = #00000000
-background-alt = #268
+background-clear = #FF222222
+background-alt = #FF666666
 ;#ad291a 
 ;#268
 ;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
+foreground = #cfcfcf
 foreground-alt = #555
 underline = #0066AA
 primary = #ffb52a
@@ -34,7 +34,7 @@ alert = #bd2c40
 [bar/top]
 monitor = ${env:MONITOR:}
 width = 100%
-height = 28
+height = 26
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
@@ -49,7 +49,7 @@ line-color = #f00
 margin-top = 0
 margin-bottom = 0
 
-border-size = 5
+border-size = 3 
 border-color = ${colors.background-clear}
 
 padding-left = 0
@@ -58,17 +58,18 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = fixed:pixelsize=11;3
+font-0 = Roboto:pixelsize=11;3
 font-1 = Unifont:style=Sans-Serif
-font-2 = FontAwesome:style=Regular:pixelsize=13;3
+font-2 = FontAwesome:style=Regular:pixelsize=12;4
 
 
-modules-left = pad playerctl pulseaudio pad
-modules-center = xwindow 
-modules-right = pad memory cpu wlan eth battery powermenu pad
+modules-left = bspwm pad xkeyboard
+modules-center = xwindow playerctl
+modules-right = pulseaudio time date wlan eth battery powermenu
 
+tray-position = right
 tray-padding = 3
-tray-background = ${colors.background-alt}
+tray-background = ${colors.background}
 
 wm-restack = bspwm
 ;wm-restack = i3
@@ -144,7 +145,7 @@ type = custom/text
 content =   
 ;alt-icon = 
 content-padding = 3
-content-background = ${colors.background-alt}
+content-background = ${colors.background}
 content-foreground = ${colors.foreground}
 click-left = rofi -show drun
 click-middle = rfull
@@ -155,7 +156,7 @@ type = custom/text
 content =   
 ;alt-icon = 
 content-padding = 3
-content-background = ${colors.background-alt}
+content-background = ${colors.background}
 content-foreground = ${colors.foreground}
 click-left = rofi -show drun
 click-middle = rfull
@@ -173,7 +174,7 @@ content-foreground = ${colors.background}
 type = internal/xwindow
 label = %title:0:30:...%
 label-maxlen = 100
-format-foreground = #FFFFFF
+format-foreground = ${colors.foreground}
 format-padding = 3
 
 [module/xkeyboard]
@@ -185,10 +186,10 @@ mount-0 = /
 
 label-layout =   %name%
 label-layout-padding = 3
-label-layout-background = ${colors.background-alt} 
+label-layout-background = ${colors.background} 
 
 label-indicator = %name%
-label-indicator-background = ${colors.background-alt}
+label-indicator-background = ${colors.background}
 label-indicator-padding = 3
 
 [module/bspwm]
@@ -311,7 +312,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground}
-format-background = ${colors.background-alt}
+format-background = ${colors.background}
 format-padding = 3
 label =  %percentage:2%%
 
@@ -320,7 +321,7 @@ type = internal/memory
 interval = 2
 format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
-format-background = ${colors.background-alt}
+format-background = ${colors.background}
 format-padding = 3
 label =  %percentage_used%%
 
@@ -373,7 +374,7 @@ time-alt =  %H:%M:%S
 
 format-prefix =  
 format-prefix-foreground = ${colors.foreground}
-format-background = ${colors.background-alt}
+format-background = ${colors.background}
 format-padding = 5
 
 label =    %time%
@@ -387,7 +388,7 @@ date-alt = " %Y-%m-%d"
 
 format-prefix =
 format-prefix-foreground = ${colors.foreground}
-format-background = ${colors.background-alt}
+format-background = ${colors.background}
 format-padding = 5
 
 label =   %date%
@@ -398,12 +399,12 @@ type = internal/pulseaudio
 format-volume = <label-volume> 
 label-volume =   %percentage%%
 label-volume-foreground = ${root.foreground}
-label-volume-background = #00a24a
+label-volume-background = ${colors.background}
 label-volume-padding = 3
 
 label-muted =  muted
 label-muted-foreground = #AAA
-label-muted-background = ${colors.background-alt}
+label-muted-background = ${colors.background}
 label-muted-padding = 3
 
 bar-volume-width = 10
@@ -460,16 +461,16 @@ full-at = 98
 format-charging = <animation-charging>  <label-charging>
 format-charging-underline = #00a24a
 
-format-charging-background = #00a24a
+format-charging-background = ${colors.background} 
 format-charging-padding = 5
 
 format-discharging = <animation-discharging>  <label-discharging>
-format-discharging-background = #ba8c00
+format-discharging-background = ${colors.background}
 format-discharging-padding = 5
 
 format-full-prefix = "  "
 format-full-prefix-foreground = ${colors.foreground}
-format-full-background = #00a24a
+format-full-background = ${colors.background}
 format-full-padding = 5
 
 ramp-capacity-0 =   
@@ -493,7 +494,7 @@ animation-discharging-4 = 
 animation-discharging-foreground = ${colors.foreground}
 animation-discharging-framerate = 750
 
-[module/nemperature]
+[module/temperature]
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
@@ -545,7 +546,7 @@ menu-2-1-exec = menu-open-0
 [module/playerctl]
 type = custom/script
 exec = ~/.scripts/polybar_playerctl.sh
-format-background = #00a24a
+format-background = ${colors.background}
 format-padding = 3
 click-left = sh ~/.scripts/togglePause.sh
 

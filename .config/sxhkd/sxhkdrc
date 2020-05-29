@@ -52,7 +52,7 @@ super + g
 
 # display layouts menu
 super + d
-  sh $HOME/.scripts/display-menu.sh
+  zsh $HOME/.scripts/display-menu.sh
 
 # switch wallpaper
 super + ctrl + d
