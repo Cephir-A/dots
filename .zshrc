@@ -124,7 +124,19 @@ logged_maven() {
   maven $* | tee ~/log.txt 
 }
 alias mvn=logged_maven
+alias share='vlc \
+    --no-video-deco \
+    --no-embedded-video \
+    --screen-fps=20 \
+    --screen-top=32 \
+    --screen-left=0 \
+    --screen-width=1920 \
+    --screen-height=1048 \
+    screen://'
+
 clear
+
+alias gradlew="./gradlew"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/joseph/.sdkman"

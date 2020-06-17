@@ -1,1 +1,1 @@
-feh --bg-fill /home/joseph/Pictures/wallpapers/ffxiv-diadem.jpg
+feh --bg-fill /home/joseph/Pictures/wallpapers/nier-automata.jpg
