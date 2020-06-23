@@ -14,6 +14,7 @@ There are two things you can do about this warning:
   ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
   )
 (package-initialize)
+
 (require 'evil)
 (evil-mode 1)
 (custom-set-variables
@@ -26,13 +27,15 @@ There are two things you can do about this warning:
  '(custom-enabled-themes (quote (wombat)))
  '(package-selected-packages
    (quote
-    (sublime-themes xref-js2 js2-refactor go-mode js2-mode org evil))))
+    (go-autocomplete auto-complete-rst auto-complete sublime-themes xref-js2 js2-refactor go-mode js2-mode org evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(require 'go-mode)
 
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -63,3 +66,7 @@ There are two things you can do about this warning:
 
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
+
+(require 'go-autocomplete)
+(require 'auto-complete-config)
+(ac-config-default)
