@@ -61,7 +61,7 @@ module-margin-right = 0
 font-0 = Roboto:pixelsize=11;3
 font-1 = Unifont:style=Sans-Serif
 font-2 = FontAwesome:style=Regular:pixelsize=12;4
-
+font-3 = Noto Sans CJK JP:size=11:antialias=true;3	
 
 modules-left = bspwm pad xkeyboard
 modules-center = xwindow playerctl

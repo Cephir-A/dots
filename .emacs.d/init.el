@@ -56,3 +56,10 @@ There are two things you can do about this warning:
 ;; add css to html mode.
  (add-to-list 'auto-mode-alist '("\\.css$" . html-mode))
  (add-to-list 'auto-mode-alist '("\\.cfm$" . html-mode))
+
+;; disable undesired gui components
+(tool-bar-mode -1)
+(toggle-scroll-bar -1) 
+
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
