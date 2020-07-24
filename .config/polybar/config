@@ -375,7 +375,7 @@ time-alt =  %H:%M:%S
 format-prefix =  
 format-prefix-foreground = ${colors.foreground}
 format-background = ${colors.background}
-format-padding = 5
+format-padding = 3
 
 label =    %time%
 
@@ -389,7 +389,7 @@ date-alt = " %Y-%m-%d"
 format-prefix =
 format-prefix-foreground = ${colors.foreground}
 format-background = ${colors.background}
-format-padding = 5
+format-padding = 3
 
 label =   %date%
 
@@ -462,16 +462,16 @@ format-charging = <animation-charging>  <label-charging>
 format-charging-underline = #00a24a
 
 format-charging-background = ${colors.background} 
-format-charging-padding = 5
+format-charging-padding = 3
 
 format-discharging = <animation-discharging>  <label-discharging>
 format-discharging-background = ${colors.background}
-format-discharging-padding = 5
+format-discharging-padding = 3
 
 format-full-prefix = "  "
 format-full-prefix-foreground = ${colors.foreground}
 format-full-background = ${colors.background}
-format-full-padding = 5
+format-full-padding = 3
 
 ramp-capacity-0 =   
 ramp-capacity-1 =   
